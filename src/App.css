@@ -1,0 +1,106 @@
+/* App-specific styles */
+
+section {
+  position: relative;
+}
+
+.glass-card,
+.glass-card-strong {
+  will-change: transform, opacity;
+}
+
+button {
+  will-change: transform;
+}
+
+.feature-card {
+  will-change: transform, box-shadow;
+}
+
+.animate-float,
+.animate-float-slow,
+.animate-pulse-soft {
+  will-change: transform, opacity;
+}
+
+.text-gradient {
+  display: inline-block;
+}
+
+.pin-spacer {
+  pointer-events: none;
+}
+
+.pin-spacer > * {
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .glass-card,
+  .glass-card-strong {
+    backdrop-filter: blur(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid rgba(123, 97, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.orb,
+.grain-overlay {
+  user-select: none;
+}
+
+nav {
+  z-index: 100;
+}
+
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(123, 97, 255, 0.3) transparent;
+}
+
+input::placeholder {
+  color: #6B6F7A;
+  opacity: 0.7;
+}
+
+button,
+a,
+input {
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #7B61FF;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
