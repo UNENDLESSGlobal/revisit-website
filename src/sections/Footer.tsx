@@ -119,7 +119,7 @@ const Footer = () => {
 
           <div className="flex items-center gap-4">
             <Link to="/privacy-policy" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Terms and Conditions</Link>
+            <Link to="/terms-and-conditions" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Terms and Conditions</Link>
           </div>
         </div>
       </div>

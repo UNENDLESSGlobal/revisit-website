@@ -13,7 +13,7 @@ const TermsPage = () => {
       <SEOHead 
         title="Terms & Conditions — Revisit App by Cynocyte"
         description="Read the Revisit app terms and conditions covering the freemium model, Google account access, AI usage, and third-party services."
-        canonicalPath="/terms-of-service"
+        canonicalPath="/terms-and-conditions"
       />
       <Link 
         to="/"

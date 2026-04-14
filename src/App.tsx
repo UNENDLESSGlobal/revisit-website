@@ -137,7 +137,7 @@ function App() {
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
-        <Route path="/terms-of-service" element={<TermsPage />} />
+        <Route path="/terms-and-conditions" element={<TermsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
