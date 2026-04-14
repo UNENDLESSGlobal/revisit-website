@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './sections/Navigation';
@@ -10,12 +10,29 @@ import AIChatSection from './sections/AIChatSection';
 import FeaturesGrid from './sections/FeaturesGrid';
 import DownloadCTA from './sections/DownloadCTA';
 import Footer from './sections/Footer';
+import DownloadPage from './DownloadPage';
+import PricingPage from './PricingPage';
+import PrivacyPage from './PrivacyPage';
+import TermsPage from './TermsPage';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const mainRef = useRef<HTMLDivElement>(null);
+  const [showDownloadPage, setShowDownloadPage] = useState(false);
+  const [showPricingPage, setShowPricingPage] = useState(false);
+  const [showPrivacyPage, setShowPrivacyPage] = useState(false);
+  const [showTermsPage, setShowTermsPage] = useState(false);
+  
+  const isAltPage = showDownloadPage || showPricingPage || showPrivacyPage || showTermsPage;
+
+  const handleHomeClick = () => {
+    setShowDownloadPage(false);
+    setShowPricingPage(false);
+    setShowPrivacyPage(false);
+    setShowTermsPage(false);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -64,7 +81,7 @@ function App() {
   }, []);
 
   return (
-    <div ref={mainRef} className="relative bg-revisit-bg min-h-screen">
+    <div ref={mainRef} className="relative bg-revisit-bg min-h-screen overflow-x-hidden max-w-[100vw]">
       {/* Grain overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]">
         <svg className="w-full h-full">
@@ -75,12 +92,26 @@ function App() {
         </svg>
       </div>
 
-      <Navigation />
+      <Navigation 
+        onDownloadClick={() => { handleHomeClick(); setShowDownloadPage(true); }} 
+        onPricingClick={() => { handleHomeClick(); setShowPricingPage(true); }}
+        isDownloadPage={isAltPage}
+        onHomeClick={handleHomeClick}
+      />
 
-      <main className="relative">
-        <div className="relative z-10">
-          <HeroSection />
-        </div>
+      {showDownloadPage ? (
+        <DownloadPage onBack={handleHomeClick} />
+      ) : showPricingPage ? (
+        <PricingPage onBack={handleHomeClick} onDownload={() => { handleHomeClick(); setShowDownloadPage(true); }} />
+      ) : showPrivacyPage ? (
+        <PrivacyPage onBack={handleHomeClick} />
+      ) : showTermsPage ? (
+        <TermsPage onBack={handleHomeClick} />
+      ) : (
+        <main className="relative">
+          <div className="relative z-10">
+            <HeroSection onDownloadClick={() => setShowDownloadPage(true)} />
+          </div>
         <div className="relative z-20">
           <CalendarSection />
         </div>
@@ -97,12 +128,16 @@ function App() {
           <FeaturesGrid />
         </div>
         <div className="relative z-[70]">
-          <DownloadCTA />
+          <DownloadCTA onDownloadClick={() => setShowDownloadPage(true)} />
         </div>
         <div className="relative z-[80]">
-          <Footer />
+          <Footer 
+            onPrivacyClick={() => { handleHomeClick(); setShowPrivacyPage(true); }}
+            onTermsClick={() => { handleHomeClick(); setShowTermsPage(true); }}
+          />
         </div>
       </main>
+      )}
     </div>
   );
 }

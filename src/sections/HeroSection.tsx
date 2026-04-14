@@ -5,7 +5,11 @@ import { Bell, Plus, Menu, BookOpen, Calendar, CheckCircle2, ChevronDown } from 
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onDownloadClick: () => void;
+}
+
+const HeroSection = ({ onDownloadClick }: HeroSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
@@ -84,20 +88,18 @@ const HeroSection = () => {
       <div ref={orb2Ref} className="orb orb-soft w-[160px] h-[160px] right-[10%] bottom-[16%] animate-float" style={{ animationDelay: '1s' }} />
 
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6">
-        <div ref={headlineRef} className="text-center mb-4 mt-16">
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-revisit-text tracking-tight leading-[0.95]">
-            Your semester.
-            <br />
-            <span className="text-gradient">Revisited.</span>
+        <div ref={headlineRef} className="text-center mb-4 mt-16 w-full">
+          <h1 className="font-heading text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-revisit-text tracking-tight leading-[1.1] w-full px-4 break-words">
+            Your daily life. <span className="text-gradient">Revisited.</span>
           </h1>
         </div>
 
-        <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-lg max-w-xl mb-6">
-          Plan exams, track attendance, and stay on top of every deadline—without the clutter.
+        <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-xl max-w-4xl mb-6 px-4">
+          Plan tasks, track attendance, and stay on top of every deadline—without the clutter.
         </p>
 
         <div ref={ctaRef} className="mb-8">
-          <button className="btn-primary flex items-center gap-2">
+          <button onClick={onDownloadClick} className="btn-primary flex items-center gap-2">
             Get the app
             <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
           </button>

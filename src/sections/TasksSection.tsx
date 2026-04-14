@@ -97,7 +97,7 @@ const TasksSection = () => {
           </p>
         </div>
 
-        <div ref={cardRef} className="w-full max-w-[960px] glass-card-strong overflow-hidden" style={{ height: 'clamp(450px, 68vh, 600px)' }}>
+        <div ref={cardRef} className="w-full max-w-[960px] glass-card-strong overflow-hidden flex flex-col" style={{ minHeight: 'clamp(480px, 68vh, 600px)' }}>
           <div className="flex items-center justify-between px-6 py-4 border-b border-revisit-border">
             <span className="font-heading font-semibold text-lg">To-Dos & Reminders</span>
           </div>
@@ -122,7 +122,7 @@ const TasksSection = () => {
               <button className="flex-1 py-2 px-4 text-revisit-text-secondary rounded-lg text-sm font-medium transition-all hover:text-revisit-text">Reminders</button>
             </div>
 
-            <div ref={listRef} className="space-y-3 overflow-y-auto max-h-[320px]">
+            <div ref={listRef} className="space-y-3 overflow-y-auto flex-1 h-[320px]">
               {tasks.map((task) => (
                 <div
                   key={task.id}

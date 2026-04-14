@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { AlertTriangle, Check, X, RotateCcw, MoreVertical } from 'lucide-react';
+import { AlertTriangle, Check, X, RotateCcw, MoreVertical, CheckCircle2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +12,12 @@ const AttendanceSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
+
+  const visualPercentage = 75.0;
+  const displayPercentage = 75;
+  const radius = 40;
+  const circumference = Math.PI * radius; // Approx 125.66
+  const targetOffset = circumference - (circumference * (visualPercentage / 100));
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -43,7 +49,7 @@ const AttendanceSection = () => {
       if (chart) {
         const arc = chart.querySelector('.attendance-arc');
         if (arc) {
-          scrollTl.fromTo(arc, { strokeDashoffset: 283 }, { strokeDashoffset: 141, ease: 'none' }, 0.05);
+          scrollTl.fromTo(arc, { strokeDashoffset: circumference }, { strokeDashoffset: targetOffset, ease: 'none' }, 0.05);
         }
         scrollTl.fromTo(chart.querySelector('.percentage-text'), { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none' }, 0.12);
       }
@@ -86,11 +92,11 @@ const AttendanceSection = () => {
         <div ref={labelRef} className="text-center mb-4">
           <span className="section-label">Attendance</span>
           <p className="text-revisit-text-secondary text-sm sm:text-base max-w-md mx-auto">
-            Know exactly where you stand—before it becomes a problem.
+            Know exactly where you stand—before it becomes a problem. Calculate attendance without the total number of days!
           </p>
         </div>
 
-        <div ref={cardRef} className="w-full max-w-[980px] glass-card-strong overflow-hidden" style={{ height: 'clamp(400px, 62vh, 540px)' }}>
+        <div ref={cardRef} className="w-full max-w-[980px] glass-card-strong overflow-hidden" style={{ minHeight: 'clamp(450px, 62vh, 540px)' }}>
           <div className="flex items-center justify-between px-6 py-4 border-b border-revisit-border">
             <div className="flex items-center gap-3">
               <span className="font-heading font-semibold text-lg">Attendance</span>
@@ -118,41 +124,40 @@ const AttendanceSection = () => {
                     stroke="#7B61FF"
                     strokeWidth="12"
                     strokeLinecap="round"
-                    strokeDasharray="283"
-                    strokeDashoffset="141"
-                    style={{ transformOrigin: 'center', transform: 'rotate(-180deg)' }}
+                    strokeDasharray={circumference}
+                    strokeDashoffset={circumference}
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-end justify-center pb-2">
-                  <span className="percentage-text text-4xl font-bold text-revisit-accent">50.0%</span>
+                  <span className="percentage-text text-4xl font-bold text-revisit-accent">{displayPercentage}%</span>
                 </div>
               </div>
 
               <div ref={statsRef} className="w-full mt-4 space-y-2">
                 <div className="stat-item flex items-center justify-between py-2 border-b border-revisit-border">
                   <span className="text-sm text-revisit-text-secondary">Attended</span>
-                  <span className="text-lg font-semibold text-emerald-600">2</span>
+                  <span className="text-lg font-semibold text-emerald-600">75</span>
                 </div>
                 <div className="stat-item flex items-center justify-between py-2 border-b border-revisit-border">
                   <span className="text-sm text-revisit-text-secondary">Total Working</span>
-                  <span className="text-lg font-semibold text-revisit-text">4</span>
+                  <span className="text-lg font-semibold text-revisit-text">100</span>
                 </div>
                 <div className="stat-item flex items-center justify-between py-2">
                   <span className="text-sm text-revisit-text-secondary">Absent</span>
-                  <span className="text-lg font-semibold text-red-500">2</span>
+                  <span className="text-lg font-semibold text-red-500">25</span>
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col gap-4">
-              <div ref={bannerRef} className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+              <div ref={bannerRef} className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                    <AlertTriangle className="w-4 h-4 text-amber-600" />
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-amber-800">Attend 4 more days for 75%</div>
-                    <div className="text-xs text-amber-600 mt-1">No more absences allowed!</div>
+                    <div className="text-sm font-medium text-emerald-800">75% attendance reached</div>
+                    <div className="text-xs text-emerald-600 mt-1">You are in the safe zone!</div>
                   </div>
                 </div>
               </div>

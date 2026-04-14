@@ -58,11 +58,11 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-xl rounded-3xl border border-white/40 shadow-card;
+    @apply bg-white/80 backdrop-blur-2xl rounded-[2rem] border border-white/50 shadow-card;
   }
   
   .glass-card-strong {
-    @apply bg-white/90 backdrop-blur-xl rounded-3xl border border-white/50 shadow-card;
+    @apply bg-white/90 backdrop-blur-3xl rounded-[2rem] border border-white/60 shadow-card;
   }
   
   .accent-gradient {

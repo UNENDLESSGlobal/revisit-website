@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Apple, Smartphone, Globe, Sparkles } from 'lucide-react';
+import { Download, Sparkles } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const DownloadCTA = () => {
+interface DownloadCTAProps {
+  onDownloadClick: () => void;
+}
+
+const DownloadCTA = ({ onDownloadClick }: DownloadCTAProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -55,51 +59,18 @@ const DownloadCTA = () => {
           </div>
 
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-revisit-text mb-4">
-            Ready to revisit your <span className="text-gradient">semester?</span>
+            Ready to revisit your <span className="text-gradient">productivity?</span>
           </h2>
 
           <p className="text-revisit-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-10">
-            Download Revisit and start the term with clarity. Available on iOS, Android, and Web.
+            Download Revisit and start the day with clarity. Fast, secure, and ready when you are.
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="btn-primary flex items-center gap-3 px-8 py-4 text-base">
-              <Apple className="w-6 h-6" />
-              <div className="text-left">
-                <div className="text-xs opacity-80">Download for</div>
-                <div className="font-semibold">iOS</div>
-              </div>
+            <button onClick={onDownloadClick} className="btn-primary flex items-center gap-3 px-10 py-5 text-lg rounded-full shadow-lg">
+              <Download className="w-6 h-6" />
+              <div className="font-semibold">Download App</div>
             </button>
-
-            <button className="btn-secondary flex items-center gap-3 px-8 py-4 text-base">
-              <Smartphone className="w-6 h-6" />
-              <div className="text-left">
-                <div className="text-xs opacity-80">Get it on</div>
-                <div className="font-semibold">Android</div>
-              </div>
-            </button>
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-2 text-revisit-text-secondary">
-            <Globe className="w-4 h-4" />
-            <span className="text-sm">Also available on Web • Sync across devices</span>
-          </div>
-
-          <div className="mt-12 pt-8 border-t border-revisit-border">
-            <div className="flex flex-wrap items-center justify-center gap-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-revisit-text">50K+</div>
-                <div className="text-xs text-revisit-text-secondary">Downloads</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-revisit-text">4.8</div>
-                <div className="text-xs text-revisit-text-secondary">App Store Rating</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-revisit-text">100%</div>
-                <div className="text-xs text-revisit-text-secondary">Free to Use</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

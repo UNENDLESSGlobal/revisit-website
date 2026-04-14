@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, GraduationCap } from 'lucide-react';
 
-const Navigation = () => {
+interface NavigationProps {
+  onDownloadClick: () => void;
+  onPricingClick?: () => void;
+  isDownloadPage?: boolean;
+  onHomeClick?: () => void;
+}
+
+const Navigation = ({ onDownloadClick, onPricingClick, isDownloadPage, onHomeClick }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -16,8 +23,8 @@ const Navigation = () => {
 
   const navLinks = [
     { label: 'Features', href: '#features' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Download', href: '#download' },
+    { label: 'Pricing', action: onPricingClick },
+    { label: 'Download', action: onDownloadClick },
   ];
 
   return (
@@ -30,7 +37,7 @@ const Navigation = () => {
         }`}
       >
         <div className="w-full px-6 lg:px-12 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#" onClick={(e) => { if (isDownloadPage && onHomeClick) { e.preventDefault(); onHomeClick(); } }} className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl accent-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
@@ -40,20 +47,31 @@ const Navigation = () => {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-revisit-accent transition-all duration-300 group-hover:w-full" />
-              </a>
+            {!isDownloadPage && navLinks.map((link) => (
+              link.action ? (
+                <button
+                  key={link.label}
+                  onClick={link.action}
+                  className="text-sm font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-revisit-accent transition-all duration-300 group-hover:w-full" />
+                </button>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-revisit-accent transition-all duration-300 group-hover:w-full" />
+                </a>
+              )
             ))}
           </div>
 
           <div className="hidden md:block">
-            <button className="btn-primary text-sm">Get the app</button>
+            {!isDownloadPage && <button onClick={onDownloadClick} className="btn-primary text-sm">Get the app</button>}
           </div>
 
           <button
@@ -77,17 +95,27 @@ const Navigation = () => {
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-2xl font-heading font-semibold text-revisit-text hover:text-revisit-accent transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <button className="btn-primary mt-4">Get the app</button>
+            {!isDownloadPage && navLinks.map((link) => (
+              link.action ? (
+                <button
+                  key={link.label}
+                  onClick={() => { setIsMobileMenuOpen(false); link.action(); }}
+                  className="text-2xl font-heading font-semibold text-revisit-text hover:text-revisit-accent transition-colors"
+                >
+                  {link.label}
+                </button>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-heading font-semibold text-revisit-text hover:text-revisit-accent transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
+            ))}
+          {!isDownloadPage && <button onClick={() => { setIsMobileMenuOpen(false); onDownloadClick(); }} className="btn-primary mt-4">Get the app</button>}
         </div>
       </div>
     </>

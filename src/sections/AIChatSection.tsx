@@ -120,7 +120,7 @@ const AIChatSection = () => {
         <div ref={cardRef} className="w-full max-w-[1000px] glass-card-strong overflow-hidden flex flex-col" style={{ height: 'clamp(450px, 68vh, 600px)' }}>
           <div ref={headerRef} className="flex items-center justify-center gap-2 px-6 py-4 border-b border-revisit-border">
             <Sparkles className="w-5 h-5 text-revisit-accent" />
-            <span className="font-heading font-semibold text-lg">Gemini</span>
+            <span className="font-heading font-semibold text-lg">AI Chat</span>
             <ChevronDown className="w-4 h-4 text-revisit-text-secondary" />
           </div>
 

@@ -92,7 +92,7 @@ const CalendarSection = () => {
           </p>
         </div>
 
-        <div ref={cardRef} className="w-full max-w-[1080px] glass-card-strong overflow-hidden" style={{ height: 'clamp(420px, 65vh, 580px)' }}>
+        <div ref={cardRef} className="w-full max-w-[1080px] glass-card-strong overflow-hidden" style={{ minHeight: 'clamp(450px, 65vh, 580px)' }}>
           <div ref={headerRef} className="flex items-center justify-between px-6 py-4 border-b border-revisit-border">
             <div className="flex items-center gap-2">
               <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-revisit-bg transition-colors">
