@@ -64,6 +64,9 @@ function App() {
 
   useEffect(() => {
     // Scroll restoration on route change
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
     window.scrollTo(0, 0);
 
     // Refresh ScrollTrigger only for home page
@@ -86,6 +89,8 @@ function App() {
         ScrollTrigger.create({
           snap: {
             snapTo: (value: number) => {
+              if (value < 0.02) return 0; // Prevent initial snap jump
+              
               const inPinned = pinnedRanges.some(
                 r => value >= r.start - 0.02 && value <= r.end + 0.02
               );
@@ -100,9 +105,9 @@ function App() {
               );
               return target;
             },
-            duration: { min: 0.15, max: 0.35 },
-            delay: 0,
-            ease: 'power2.out',
+            duration: { min: 0.2, max: 0.6 },
+            delay: 0.05,
+            ease: 'power1.inOut',
           },
         });
       }, 500);

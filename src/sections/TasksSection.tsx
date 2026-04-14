@@ -24,13 +24,15 @@ const TasksSection = () => {
     if (!section || !card) return;
 
     const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=130%',
+          end: isMobile ? '+=80%' : '+=130%',
           pin: true,
-          scrub: 0.6,
+          scrub: isMobile ? 0.3 : 0.6,
         },
       });
 

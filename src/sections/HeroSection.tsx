@@ -48,13 +48,15 @@ const HeroSection = ({ }: HeroSectionProps) => {
       loadTl.fromTo('.stat-card-left', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6, stagger: 0.1 }, '-=0.5');
       loadTl.fromTo('.exam-list-right', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6 }, '-=0.4');
 
+      const isMobile = window.innerWidth < 768;
+      
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=130%',
+          end: isMobile ? '+=80%' : '+=130%',
           pin: true,
-          scrub: 0.6,
+          scrub: isMobile ? 0.3 : 0.6,
           onLeaveBack: () => {
             gsap.set([headline, subheadline, cta], { opacity: 1, y: 0 });
             gsap.set(card, { opacity: 1, y: 0, scale: 1 });
