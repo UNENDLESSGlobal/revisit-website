@@ -64,9 +64,21 @@ const DownloadPage = () => {
         </p>
 
         <div className="glass-card-strong w-full max-w-md p-8 flex flex-col items-center">
-          <div className="w-20 h-20 rounded-3xl accent-gradient flex items-center justify-center mb-8 shadow-lg">
+          <a 
+            href={downloadUrl}
+            onClick={() => {
+              if (typeof window !== 'undefined' && 'gtag' in window) {
+                // @ts-ignore - gtag is loaded via index.html
+                window.gtag('event', 'apk_download_click', {
+                  'event_category': 'engagement',
+                  'event_label': 'download_page_icon_cta'
+                });
+              }
+            }}
+            className={`w-20 h-20 rounded-3xl accent-gradient flex items-center justify-center mb-8 shadow-lg transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'cursor-pointer hover:shadow-xl hover:-translate-y-1 active:scale-95'}`}
+          >
             <Download className="w-10 h-10 text-white" />
-          </div>
+          </a>
           
           <h2 className="text-2xl font-bold font-heading mb-2">Download Application</h2>
           <p className="text-sm text-revisit-text-secondary text-center mb-8">
