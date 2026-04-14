@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { AlertTriangle, Check, X, RotateCcw, MoreVertical, CheckCircle2 } from 'lucide-react';
+import { Check, X, RotateCcw, MoreVertical, CheckCircle2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 

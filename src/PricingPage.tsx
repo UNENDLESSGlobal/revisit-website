@@ -1,30 +1,32 @@
 import { ArrowLeft, Check, X, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { SEOHead } from './components/SEOHead';
 
-interface PricingPageProps {
-  onBack: () => void;
-  onDownload: () => void;
-}
-
-const PricingPage = ({ onBack, onDownload }: PricingPageProps) => {
+const PricingPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
-      <button 
-        onClick={onBack}
+      <SEOHead 
+        title="Revisit Pricing — Free & Premium Plans for Students"
+        description="Revisit is free to download with ads. Upgrade to Premium for ₹99 for an ad-free experience and unlimited AI access. Made by Cynocyte."
+        canonicalPath="/pricing"
+      />
+      <Link 
+        to="/"
         className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="font-medium">Back to Home</span>
-      </button>
+      </Link>
 
       <div className="orb orb-accent w-[300px] h-[300px] left-[10%] top-[10%] animate-float-slow opacity-30" />
       <div className="orb orb-soft w-[400px] h-[400px] right-[5%] bottom-[10%] animate-float opacity-20" style={{ animationDelay: '1s' }} />
 
       <div className="relative z-10 w-full max-w-5xl mt-12 mb-20 text-center flex flex-col items-center">
-        <h1 className="font-heading text-5xl md:text-6xl font-bold text-revisit-text tracking-tight mb-6">
-          Simple, transparent <span className="text-gradient">Pricing</span>.
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-6 mt-16 text-center">
+          Revisit App Pricing — <span className="text-gradient">Free & Premium Beta Plans</span>
         </h1>
-        <p className="text-revisit-text-secondary text-lg mb-12 max-w-xl">
-          Choose the best plan that fits your study journey. Upgrade at any time from within the app.
+        <p className="text-revisit-text-secondary text-lg mb-16 max-w-2xl text-center mx-auto">
+          Start for free to organize your academic life, or unlock unlimited AI powers with the Premium Beta plan. No hidden fees.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto items-center">
@@ -60,9 +62,9 @@ const PricingPage = ({ onBack, onDownload }: PricingPageProps) => {
               </div>
             </div>
 
-            <button onClick={onDownload} className="w-full py-4 rounded-full font-semibold text-revisit-text bg-white border border-revisit-border hover:bg-gray-50 transition-colors shadow-sm">
+            <Link to="/download" className="w-full py-4 rounded-full font-semibold text-revisit-text bg-white border border-revisit-border hover:bg-gray-50 transition-colors shadow-sm block text-center">
               Get Started for Free
-            </button>
+            </Link>
           </div>
 
           {/* Premium Plan */}
@@ -109,9 +111,9 @@ const PricingPage = ({ onBack, onDownload }: PricingPageProps) => {
               </p>
             </div>
 
-            <button onClick={onDownload} className="btn-primary w-full py-4 rounded-full font-semibold shadow-lg hover:shadow-xl text-lg hover:-translate-y-1 transition-all">
+            <Link to="/download" className="btn-primary w-full py-4 rounded-full font-semibold shadow-lg hover:shadow-xl text-lg hover:-translate-y-1 transition-all block text-center">
               Unlock Premium
-            </button>
+            </Link>
           </div>
         </div>
       </div>

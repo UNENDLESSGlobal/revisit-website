@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Download, ShieldCheck } from 'lucide-react';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './lib/supabase';
+import { Link } from 'react-router-dom';
+import { SEOHead } from './components/SEOHead';
 
-interface DownloadPageProps {
-  onBack: () => void;
-}
-
-const DownloadPage = ({ onBack }: DownloadPageProps) => {
+const DownloadPage = () => {
   const [downloadUrl, setDownloadUrl] = useState<string>('#');
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -40,20 +38,25 @@ const DownloadPage = ({ onBack }: DownloadPageProps) => {
 
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
-      <button 
-        onClick={onBack}
+      <SEOHead 
+        title="Download Revisit — Free Student Manager App for Android"
+        description="Download the Revisit Android app for free. Manage your classes, track attendance, stay on top of tasks, and get AI study plans."
+        canonicalPath="/download"
+      />
+      <Link 
+        to="/"
         className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="font-medium">Back to Home</span>
-      </button>
+      </Link>
 
       <div className="orb orb-accent w-[300px] h-[300px] left-[10%] top-[10%] animate-float-slow opacity-30" />
       <div className="orb orb-soft w-[400px] h-[400px] right-[5%] bottom-[10%] animate-float opacity-20" style={{ animationDelay: '1s' }} />
       
       <div className="relative z-10 w-full max-w-2xl mt-12 mb-20 text-center flex flex-col items-center">
-        <h1 className="font-heading text-5xl md:text-6xl font-bold text-revisit-text tracking-tight mb-6">
-          Ready to <span className="text-gradient">Revisit</span> your potential?
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-6">
+          Download <span className="text-gradient">Revisit</span> — Free Student Manager for Android
         </h1>
         <p className="text-revisit-text-secondary text-lg mb-12 max-w-xl">
           Get the ultimate study companion designed to make your daily life seamless and stress-free. Let's get started.
@@ -71,6 +74,15 @@ const DownloadPage = ({ onBack }: DownloadPageProps) => {
 
           <a 
             href={downloadUrl}
+            onClick={() => {
+              if (typeof window !== 'undefined' && 'gtag' in window) {
+                // @ts-ignore - gtag is loaded via index.html
+                window.gtag('event', 'apk_download_click', {
+                  'event_category': 'engagement',
+                  'event_label': 'download_page_cta'
+                });
+              }
+            }}
             className={`w-full flex items-center justify-center gap-3 px-8 py-4 bg-revisit-accent text-white font-semibold rounded-full transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'hover:bg-revisit-accent-dark hover:shadow-lg hover:-translate-y-1 active:scale-95'}`}
           >
             {isLoading ? (

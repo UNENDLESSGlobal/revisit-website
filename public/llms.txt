@@ -1,0 +1,18 @@
+# Revisit - Student Life Manager App
+
+Revisit is a free Android application designed for students to track attendance, manage tasks and reminders, build weekly timetables, use a monthly calendar, and receive AI-powered personalized study plans. 
+
+## Features
+- **Attendance Tracker**: Log presents/absents and track 75% requirements.
+- **Tasks & Reminders**: To-do list with deadlines and priority ranking.
+- **Routines**: Weekly timetables and dynamic class scheduling.
+- **AI Study Planner**: Unlimited AI access in Premium Beta to assist with curriculum pacing and exam prep.
+- **Free Version**: Includes ads and all basic tracking features.
+- **Premium Beta Version (₹99 until launch)**: Ad-free experience with unlimited AI feature usage.
+
+## Links
+- Official Website: https://revisitstudentmanager.vercel.app
+- Download Page: https://revisitstudentmanager.vercel.app/download
+- Pricing: https://revisitstudentmanager.vercel.app/pricing 
+
+Created by Swarnadeep Mukherjee under Cynocyte.

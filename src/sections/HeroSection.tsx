@@ -2,14 +2,15 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Bell, Plus, Menu, BookOpen, Calendar, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeroSectionProps {
-  onDownloadClick: () => void;
+  onDownloadClick?: () => void; // Keeping prop for backwards compatibility but not using it
 }
 
-const HeroSection = ({ onDownloadClick }: HeroSectionProps) => {
+const HeroSection = ({ }: HeroSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
@@ -95,14 +96,14 @@ const HeroSection = ({ onDownloadClick }: HeroSectionProps) => {
         </div>
 
         <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-xl max-w-4xl mb-6 px-4">
-          Plan tasks, track attendance, and stay on top of every deadline—without the clutter.
+          The free Android app that helps students track attendance, manage tasks, build timetables, and get AI study plans — all in one place. Free tier includes ads with basic features; Premium Beta unlocks unlimited AI access ad-free for ₹99.
         </p>
 
         <div ref={ctaRef} className="mb-8">
-          <button onClick={onDownloadClick} className="btn-primary flex items-center gap-2">
-            Get the app
+          <Link to="/download" className="btn-primary flex items-center gap-2 inline-flex">
+            Download Revisit
             <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
-          </button>
+          </Link>
         </div>
 
         <div ref={cardRef} className="w-full max-w-[1100px] glass-card-strong overflow-hidden" style={{ height: 'clamp(380px, 55vh, 520px)' }}>

@@ -1,29 +1,37 @@
 import { ArrowLeft } from 'lucide-react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { SEOHead } from './components/SEOHead';
 
-interface PrivacyPageProps {
-  onBack: () => void;
-}
-
-const PrivacyPage = ({ onBack }: PrivacyPageProps) => {
+const PrivacyPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 md:px-12 items-center">
-      <button 
-        onClick={onBack}
+      <SEOHead 
+        title="Privacy Policy — Revisit App by Cynocyte"
+        description="Read the Revisit app privacy policy. Covers data collection, Google account access, Supabase storage, AI processing, and your rights."
+        canonicalPath="/privacy-policy"
+      />
+      <Link 
+        to="/"
         className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors z-20"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="font-medium">Back to Home</span>
-      </button>
+      </Link>
 
       <div className="orb orb-accent w-[300px] h-[300px] left-[10%] top-[10%] animate-float-slow opacity-30 fixed" />
       <div className="orb orb-soft w-[400px] h-[400px] right-[5%] bottom-[10%] animate-float opacity-20 fixed" style={{ animationDelay: '1s' }} />
 
       <div className="relative z-10 w-full max-w-4xl mt-16 mb-24">
+        <div className="flex items-center gap-2 text-sm text-revisit-text-secondary mb-6 justify-center">
+          <Link to="/" className="hover:text-revisit-accent transition-colors">Home</Link>
+          <span>/</span>
+          <span className="text-revisit-text font-medium">Privacy Policy</span>
+        </div>
         <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-8 text-center">
           Privacy <span className="text-gradient">Policy</span>
         </h1>

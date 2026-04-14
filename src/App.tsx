@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from './sections/Navigation';
@@ -14,71 +15,108 @@ import DownloadPage from './DownloadPage';
 import PricingPage from './PricingPage';
 import PrivacyPage from './PrivacyPage';
 import TermsPage from './TermsPage';
+import NotFoundPage from './NotFoundPage';
+import { SEOHead } from './components/SEOHead';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const Home = () => {
+  return (
+    <main className="relative" id="main-content">
+      <SEOHead 
+        title="Revisit — Student Life Manager App for Android"
+        description="Revisit is a free Android app for students to track attendance, manage tasks, build timetables, and get AI-powered study plans. By Cynocyte."
+        canonicalPath="/"
+        isHome={true}
+      />
+      <div className="relative z-10">
+        <HeroSection />
+      </div>
+      <div className="relative z-20">
+        <CalendarSection />
+      </div>
+      <div className="relative z-30">
+        <AttendanceSection />
+      </div>
+      <div className="relative z-40">
+        <TasksSection />
+      </div>
+      <div className="relative z-50">
+        <AIChatSection />
+      </div>
+      <div className="relative z-[60]">
+        <FeaturesGrid />
+      </div>
+      <div className="relative z-[70]">
+        <DownloadCTA />
+      </div>
+      <div className="relative z-[80]">
+        <Footer />
+      </div>
+    </main>
+  );
+};
+
 function App() {
   const mainRef = useRef<HTMLDivElement>(null);
-  const [showDownloadPage, setShowDownloadPage] = useState(false);
-  const [showPricingPage, setShowPricingPage] = useState(false);
-  const [showPrivacyPage, setShowPrivacyPage] = useState(false);
-  const [showTermsPage, setShowTermsPage] = useState(false);
-  
-  const isAltPage = showDownloadPage || showPricingPage || showPrivacyPage || showTermsPage;
-
-  const handleHomeClick = () => {
-    setShowDownloadPage(false);
-    setShowPricingPage(false);
-    setShowPrivacyPage(false);
-    setShowTermsPage(false);
-  };
+  const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const pinned = ScrollTrigger.getAll()
-        .filter(st => st.vars.pin)
-        .sort((a, b) => a.start - b.start);
-      
-      const maxScroll = ScrollTrigger.maxScroll(window);
-      
-      if (!maxScroll || pinned.length === 0) return;
+    // Scroll restoration on route change
+    window.scrollTo(0, 0);
 
-      const pinnedRanges = pinned.map(st => ({
-        start: st.start / maxScroll,
-        end: (st.end ?? st.start) / maxScroll,
-        center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
-      }));
+    // Refresh ScrollTrigger only for home page
+    if (location.pathname === '/') {
+      const timer = setTimeout(() => {
+        const pinned = ScrollTrigger.getAll()
+          .filter(st => st.vars.pin)
+          .sort((a, b) => a.start - b.start);
+        
+        const maxScroll = ScrollTrigger.maxScroll(window);
+        
+        if (!maxScroll || pinned.length === 0) return;
 
-      ScrollTrigger.create({
-        snap: {
-          snapTo: (value: number) => {
-            const inPinned = pinnedRanges.some(
-              r => value >= r.start - 0.02 && value <= r.end + 0.02
-            );
-            if (!inPinned) return value;
+        const pinnedRanges = pinned.map(st => ({
+          start: st.start / maxScroll,
+          end: (st.end ?? st.start) / maxScroll,
+          center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
+        }));
 
-            const target = pinnedRanges.reduce(
-              (closest, r) =>
-                Math.abs(r.center - value) < Math.abs(closest - value)
-                  ? r.center
-                  : closest,
-              pinnedRanges[0]?.center ?? 0
-            );
-            return target;
+        ScrollTrigger.create({
+          snap: {
+            snapTo: (value: number) => {
+              const inPinned = pinnedRanges.some(
+                r => value >= r.start - 0.02 && value <= r.end + 0.02
+              );
+              if (!inPinned) return value;
+
+              const target = pinnedRanges.reduce(
+                (closest, r) =>
+                  Math.abs(r.center - value) < Math.abs(closest - value)
+                    ? r.center
+                    : closest,
+                pinnedRanges[0]?.center ?? 0
+              );
+              return target;
+            },
+            duration: { min: 0.15, max: 0.35 },
+            delay: 0,
+            ease: 'power2.out',
           },
-          duration: { min: 0.15, max: 0.35 },
-          delay: 0,
-          ease: 'power2.out',
-        },
-      });
-    }, 500);
+        });
+      }, 500);
 
-    return () => {
-      clearTimeout(timer);
-      ScrollTrigger.getAll().forEach(st => st.kill());
-    };
-  }, []);
+      return () => {
+        clearTimeout(timer);
+        ScrollTrigger.getAll().forEach(st => st.kill());
+      };
+    } else {
+       ScrollTrigger.getAll().forEach(st => st.kill());
+    }
+  }, [location.pathname]);
+
+  const isAltPage = location.pathname !== '/';
 
   return (
     <div ref={mainRef} className="relative bg-revisit-bg min-h-screen overflow-x-hidden max-w-[100vw]">
@@ -92,52 +130,16 @@ function App() {
         </svg>
       </div>
 
-      <Navigation 
-        onDownloadClick={() => { handleHomeClick(); setShowDownloadPage(true); }} 
-        onPricingClick={() => { handleHomeClick(); setShowPricingPage(true); }}
-        isDownloadPage={isAltPage}
-        onHomeClick={handleHomeClick}
-      />
+      <Navigation isDownloadPage={isAltPage} />
 
-      {showDownloadPage ? (
-        <DownloadPage onBack={handleHomeClick} />
-      ) : showPricingPage ? (
-        <PricingPage onBack={handleHomeClick} onDownload={() => { handleHomeClick(); setShowDownloadPage(true); }} />
-      ) : showPrivacyPage ? (
-        <PrivacyPage onBack={handleHomeClick} />
-      ) : showTermsPage ? (
-        <TermsPage onBack={handleHomeClick} />
-      ) : (
-        <main className="relative">
-          <div className="relative z-10">
-            <HeroSection onDownloadClick={() => setShowDownloadPage(true)} />
-          </div>
-        <div className="relative z-20">
-          <CalendarSection />
-        </div>
-        <div className="relative z-30">
-          <AttendanceSection />
-        </div>
-        <div className="relative z-40">
-          <TasksSection />
-        </div>
-        <div className="relative z-50">
-          <AIChatSection />
-        </div>
-        <div className="relative z-[60]">
-          <FeaturesGrid />
-        </div>
-        <div className="relative z-[70]">
-          <DownloadCTA onDownloadClick={() => setShowDownloadPage(true)} />
-        </div>
-        <div className="relative z-[80]">
-          <Footer 
-            onPrivacyClick={() => { handleHomeClick(); setShowPrivacyPage(true); }}
-            onTermsClick={() => { handleHomeClick(); setShowTermsPage(true); }}
-          />
-        </div>
-      </main>
-      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPage />} />
+        <Route path="/terms-of-service" element={<TermsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }

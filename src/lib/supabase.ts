@@ -1,2 +1,2 @@
-export const SUPABASE_URL = 'https://ngmevcymxvjsjhsbaure.supabase.co';
-export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nbWV2Y3lteHZqc2poc2JhdXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcxNDIsImV4cCI6MjA4NjU2MzE0Mn0.WNDhr5NYZL-8Bea_E0Uv_f4Xq5uaJwPG9WDLh3qJeSA';
+export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;

@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { GraduationCap, Twitter, Instagram, Mail, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 
-interface FooterProps {
-  onPrivacyClick?: () => void;
-  onTermsClick?: () => void;
-}
-
-const Footer = ({ onPrivacyClick, onTermsClick }: FooterProps) => {
+const Footer = () => {
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'conflict' | 'error' | 'invalid'>('idle');
 
@@ -84,7 +80,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }: FooterProps) => {
         <div className="bg-white rounded-3xl p-6 mb-12 border border-revisit-border shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-              <h4 className="font-heading font-semibold text-lg text-revisit-text mb-1">Stay Updated</h4>
+              <h3 className="font-heading font-semibold text-lg text-revisit-text mb-1">Stay Updated</h3>
               <p className="text-sm text-revisit-text-secondary">Get the latest features and study tips delivered to your inbox.</p>
             </div>
             <div className="flex flex-col gap-2 w-full md:w-auto">
@@ -122,8 +118,8 @@ const Footer = ({ onPrivacyClick, onTermsClick }: FooterProps) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <button onClick={onPrivacyClick} className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Privacy Policy</button>
-            <button onClick={onTermsClick} className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Terms and Conditions</button>
+            <Link to="/privacy-policy" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Terms and Conditions</Link>
           </div>
         </div>
       </div>

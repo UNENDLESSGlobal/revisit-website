@@ -2,14 +2,15 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Download, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface DownloadCTAProps {
-  onDownloadClick: () => void;
+  onDownloadClick?: () => void;
 }
 
-const DownloadCTA = ({ onDownloadClick }: DownloadCTAProps) => {
+const DownloadCTA = ({ }: DownloadCTAProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -67,10 +68,10 @@ const DownloadCTA = ({ onDownloadClick }: DownloadCTAProps) => {
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button onClick={onDownloadClick} className="btn-primary flex items-center gap-3 px-10 py-5 text-lg rounded-full shadow-lg">
+            <Link to="/download" className="btn-primary flex items-center gap-3 px-10 py-5 text-lg rounded-full shadow-lg">
               <Download className="w-6 h-6" />
               <div className="font-semibold">Download App</div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
