@@ -91,12 +91,12 @@ const HeroSection = ({ }: HeroSectionProps) => {
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6">
         <div ref={headlineRef} className="text-center mb-4 mt-16 w-full">
           <h1 className="font-heading text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-revisit-text tracking-tight leading-[1.1] w-full px-4 break-words">
-            Your daily life. <span className="text-gradient">Revisited.</span>
+            Your daily life. <span className="text-gradient">REVISITed.</span>
           </h1>
         </div>
 
-        <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-xl max-w-4xl mb-6 px-4">
-          The free Android app that helps students track attendance, manage tasks, build timetables, and get AI study plans — all in one place. Free tier includes ads with basic features; Premium Beta unlocks unlimited AI access ad-free for ₹99.
+        <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-xl max-w-4xl mb-6 px-4 font-medium">
+          Your only AI-powered tracker.
         </p>
 
         <div ref={ctaRef} className="mb-8">
@@ -131,7 +131,7 @@ const HeroSection = ({ }: HeroSectionProps) => {
                 <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center mb-3">
                   <BookOpen className="w-5 h-5 text-emerald-600" />
                 </div>
-                <div className="text-3xl font-bold text-revisit-text mb-1">0%</div>
+                <div className="text-3xl font-bold text-revisit-text mb-1">95%</div>
                 <div className="text-sm font-medium text-revisit-text">Books Progress</div>
                 <div className="text-xs text-revisit-text-secondary mt-1">3 books tracked</div>
               </div>
@@ -140,7 +140,7 @@ const HeroSection = ({ }: HeroSectionProps) => {
                 <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-3">
                   <CheckCircle2 className="w-5 h-5 text-blue-600" />
                 </div>
-                <div className="text-3xl font-bold text-revisit-text mb-1">50.0%</div>
+                <div className="text-3xl font-bold text-revisit-text mb-1">75%</div>
                 <div className="text-sm font-medium text-revisit-text">Lowest Attendance</div>
                 <div className="text-xs text-revisit-text-secondary mt-1">Across all subjects</div>
               </div>
