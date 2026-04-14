@@ -113,7 +113,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-revisit-border">
-          <div className="text-sm text-revisit-text-secondary">© 2026 Revisit. All rights reserved.</div>
+          <div className="text-sm text-revisit-text-secondary">© 2026 Revisit by Cynocyte. All rights reserved.</div>
 
           <div className="flex items-center gap-1 text-sm text-revisit-text-secondary">
             Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> for students worldwide
