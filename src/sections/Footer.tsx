@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { GraduationCap, Twitter, Instagram, Mail, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+
+const SUPABASE_URL = "https://ngmevcymxvjsjhsbaure.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nbWV2Y3lteHZqc2poc2JhdXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcxNDIsImV4cCI6MjA4NjU2MzE0Mn0.WNDhr5NYZL-8Bea_E0Uv_f4Xq5uaJwPG9WDLh3qJeSA";
 
 const Footer = () => {
   const [email, setEmail] = useState('');

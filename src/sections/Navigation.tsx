@@ -21,6 +21,7 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
   }, []);
 
   const navLinks = [
+    { label: 'Home', to: '/' },
     { label: 'Features', action: () => { if (isDownloadPage) { navigate('/'); setTimeout(() => document.getElementById('features')?.scrollIntoView(), 100); } else { document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); } } },
     { label: 'Pricing', to: '/pricing' },
     { label: 'Download', to: '/download' },

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Download, ShieldCheck } from 'lucide-react';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './lib/supabase';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
 
+const SUPABASE_URL = "https://ngmevcymxvjsjhsbaure.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nbWV2Y3lteHZqc2poc2JhdXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcxNDIsImV4cCI6MjA4NjU2MzE0Mn0.WNDhr5NYZL-8Bea_E0Uv_f4Xq5uaJwPG9WDLh3qJeSA";
 const DownloadPage = () => {
   const [downloadUrl, setDownloadUrl] = useState<string>('#');
   const [isLoading, setIsLoading] = useState<boolean>(true);
