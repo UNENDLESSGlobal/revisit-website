@@ -82,7 +82,7 @@ const DownloadPage = () => {
 
           <h2 className="text-2xl font-bold font-heading mb-2">Download REVISIT</h2>
           <p className="text-sm text-revisit-text-secondary text-center mb-8">
-            Available on modern mobile devices. Fast, secure, and fully native.
+            Available on Android. Fast, secure, and fully native.
           </p>
 
           <a
@@ -102,7 +102,7 @@ const DownloadPage = () => {
               <span className="flex gap-2 items-center"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Fetching link...</span>
             ) : (
               <>
-                <span>Get the App</span>
+                <span>Download for Android</span>
                 <Download className="w-5 h-5" />
               </>
             )}
