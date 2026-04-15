@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GraduationCap, Twitter, Instagram, Mail, Heart } from 'lucide-react';
+import { Twitter, Instagram, Mail, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SUPABASE_URL = "https://ngmevcymxvjsjhsbaure.supabase.co";
