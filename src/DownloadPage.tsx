@@ -46,7 +46,7 @@ const DownloadPage = () => {
       />
       <Link 
         to="/"
-        className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
+        className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="font-medium">Back to Home</span>
@@ -56,7 +56,7 @@ const DownloadPage = () => {
       <div className="orb orb-soft w-[400px] h-[400px] right-[5%] bottom-[10%] animate-float opacity-20" style={{ animationDelay: '1s' }} />
       
       <div className="relative z-10 w-full max-w-2xl mt-12 mb-20 text-center flex flex-col items-center">
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-6">
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-6 mt-16 text-center">
           Download <span className="text-gradient">Revisit</span> — Free Student Manager for Android
         </h1>
         <p className="text-revisit-text-secondary text-lg mb-12 max-w-xl">
@@ -75,9 +75,9 @@ const DownloadPage = () => {
                 });
               }
             }}
-            className={`w-20 h-20 rounded-3xl accent-gradient flex items-center justify-center mb-8 shadow-lg transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'cursor-pointer hover:shadow-xl hover:-translate-y-1 active:scale-95'}`}
+            className={`flex items-center justify-center mb-8 transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'cursor-pointer hover:scale-105 active:scale-95'}`}
           >
-            <Download className="w-10 h-10 text-white" />
+            <img src="/assets/logo_light.png" alt="Revisit" className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-xl" />
           </a>
           
           <h2 className="text-2xl font-bold font-heading mb-2">Download Application</h2>

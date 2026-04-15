@@ -55,10 +55,7 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center gap-6 mb-12">
           <div>
             <a href="#" className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl accent-gradient flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-heading font-bold text-xl text-revisit-text">Revisit</span>
+              <img src="/assets/named_logo_light.png" alt="Revisit Logo" className="h-[136px] w-auto" />
             </a>
             <p className="text-sm text-revisit-text-secondary max-w-sm mx-auto">
               Your complete study companion. Plan, track, and succeed in your daily journey.

@@ -12,7 +12,7 @@ const PricingPage = () => {
       />
       <Link 
         to="/"
-        className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
+        className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="font-medium">Back to Home</span>

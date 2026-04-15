@@ -39,12 +39,7 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
       >
         <div className="w-full px-6 lg:px-12 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl accent-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-              <GraduationCap className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-heading font-bold text-xl text-revisit-text">
-              Revisit
-            </span>
+            <img src="/assets/named_logo_light.png" alt="Revisit Logo" className="h-[3.25rem] md:h-28 w-auto transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -53,7 +48,7 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
                 <Link
                   key={link.label}
                   to={link.to}
-                  className="text-sm font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
+                  className="text-sm md:text-base font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-revisit-accent transition-all duration-300 group-hover:w-full" />
@@ -62,7 +57,7 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
                 <button
                   key={link.label}
                   onClick={link.action}
-                  className="text-sm font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
+                  className="text-sm md:text-base font-medium text-revisit-text-secondary hover:text-revisit-text transition-colors duration-300 relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-revisit-accent transition-all duration-300 group-hover:w-full" />
@@ -72,7 +67,7 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
           </div>
 
           <div className="hidden md:block">
-            <Link to="/download" className="btn-primary text-sm inline-block">Download Revisit</Link>
+            <Link to="/download" className="btn-primary text-sm md:text-base md:px-6 md:py-2.5 inline-block">Download Revisit</Link>
           </div>
 
           <button
