@@ -44,7 +44,7 @@ const DownloadPage = () => {
         description="Download the Revisit Android app for free. Manage your classes, track attendance, stay on top of tasks, and get AI study plans."
         canonicalPath="/download"
       />
-      <Link
+      <Linkst
         to="/"
         className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
