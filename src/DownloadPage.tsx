@@ -19,7 +19,7 @@ const DownloadPage = () => {
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
           }
         });
-        
+
         if (response.ok) {
           const data = await response.json();
           if (data && data.length > 0 && data[0].update_url) {
@@ -39,12 +39,12 @@ const DownloadPage = () => {
 
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
-      <SEOHead 
+      <SEOHead
         title="Download Revisit — Free Student Manager App for Android"
         description="Download the Revisit Android app for free. Manage your classes, track attendance, stay on top of tasks, and get AI study plans."
         canonicalPath="/download"
       />
-      <Link 
+      <Link
         to="/"
         className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >
@@ -54,7 +54,7 @@ const DownloadPage = () => {
 
       <div className="orb orb-accent w-[300px] h-[300px] left-[10%] top-[10%] animate-float-slow opacity-30" />
       <div className="orb orb-soft w-[400px] h-[400px] right-[5%] bottom-[10%] animate-float opacity-20" style={{ animationDelay: '1s' }} />
-      
+
       <div className="relative z-10 w-full max-w-2xl mt-12 mb-20 text-center flex flex-col items-center">
         <h1 className="font-heading text-4xl md:text-5xl font-bold text-revisit-text tracking-tight mb-6 mt-16 text-center">
           Download <span className="text-gradient">Revisit</span> — Free Student Manager for Android
@@ -64,7 +64,7 @@ const DownloadPage = () => {
         </p>
 
         <div className="glass-card-strong w-full max-w-md p-8 flex flex-col items-center">
-          <a 
+          <a
             href={downloadUrl}
             onClick={() => {
               if (typeof window !== 'undefined' && 'gtag' in window) {
@@ -79,13 +79,13 @@ const DownloadPage = () => {
           >
             <img src="/assets/logo_light.png" alt="Revisit" className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-xl" />
           </a>
-          
-          <h2 className="text-2xl font-bold font-heading mb-2">Download Application</h2>
+
+          <h2 className="text-2xl font-bold font-heading mb-2">Download REVISIT</h2>
           <p className="text-sm text-revisit-text-secondary text-center mb-8">
             Available on modern mobile devices. Fast, secure, and fully native.
           </p>
 
-          <a 
+          <a
             href={downloadUrl}
             onClick={() => {
               if (typeof window !== 'undefined' && 'gtag' in window) {
@@ -107,7 +107,7 @@ const DownloadPage = () => {
               </>
             )}
           </a>
-          
+
           <div className="mt-8 flex items-center gap-2 text-xs text-revisit-text-secondary opacity-80">
             <ShieldCheck className="w-4 h-4" />
             <span>Secure download directly from official servers</span>
