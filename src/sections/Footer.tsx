@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Twitter, Instagram, Mail, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const SUPABASE_URL = "https://ngmevcymxvjsjhsbaure.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nbWV2Y3lteHZqc2poc2JhdXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcxNDIsImV4cCI6MjA4NjU2MzE0Mn0.WNDhr5NYZL-8Bea_E0Uv_f4Xq5uaJwPG9WDLh3qJeSA";
+import { subscribeToNewsletter } from '../lib/supabase';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -18,21 +16,12 @@ const Footer = () => {
     setNewsletterStatus('loading');
     
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/newsletter`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        },
-        body: JSON.stringify({ email })
-      });
+      const responseStatus = await subscribeToNewsletter(email);
 
-      if (response.status === 201) {
+      if (responseStatus === 201) {
         setNewsletterStatus('success');
         setEmail('');
-      } else if (response.status === 409) {
+      } else if (responseStatus === 409) {
         setNewsletterStatus('conflict');
       } else {
         setNewsletterStatus('error');
@@ -116,9 +105,12 @@ const Footer = () => {
             Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> for students worldwide
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link to="/privacy-policy" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Privacy Policy</Link>
             <Link to="/terms-and-conditions" className="text-sm text-revisit-text-secondary hover:text-revisit-accent transition-colors">Terms and Conditions</Link>
+            <Link to="/admin" className="text-xs text-revisit-text-secondary/80 hover:text-revisit-accent transition-colors">
+              Admin Login
+            </Link>
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ pnpm-debug.log*
 .stylelintcache
 
 # Misc
+.codex
 .DS_Store
 .DS_Store?
 ._*

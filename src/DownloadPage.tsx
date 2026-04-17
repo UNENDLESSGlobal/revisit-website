@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, Download, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
+import { fetchPublicDownloadUrl } from './lib/supabase';
 
-const SUPABASE_URL = "https://ngmevcymxvjsjhsbaure.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nbWV2Y3lteHZqc2poc2JhdXJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcxNDIsImV4cCI6MjA4NjU2MzE0Mn0.WNDhr5NYZL-8Bea_E0Uv_f4Xq5uaJwPG9WDLh3qJeSA";
 const DownloadPage = () => {
   const [downloadUrl, setDownloadUrl] = useState<string>('#');
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -12,20 +11,8 @@ const DownloadPage = () => {
   useEffect(() => {
     const fetchDownloadLink = async () => {
       try {
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/app_config?id=eq.1&select=update_url`, {
-          method: 'GET',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.length > 0 && data[0].update_url) {
-            setDownloadUrl(data[0].update_url);
-          }
-        }
+        const resolvedUrl = await fetchPublicDownloadUrl();
+        setDownloadUrl(resolvedUrl);
       } catch (error) {
         console.error('Failed to fetch download url', error);
       } finally {
@@ -44,7 +31,7 @@ const DownloadPage = () => {
         description="Download the Revisit Android app for free. Manage your classes, track attendance, stay on top of tasks, and get AI study plans."
         canonicalPath="/download"
       />
-      <Linkst
+      <Link
         to="/"
         className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
       >

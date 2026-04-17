@@ -17,6 +17,8 @@ import PrivacyPage from './PrivacyPage';
 import TermsPage from './TermsPage';
 import NotFoundPage from './NotFoundPage';
 import { SEOHead } from './components/SEOHead';
+import AdminLoginPage from './admin/AdminLoginPage';
+import AdminDashboardPage from './admin/AdminDashboardPage';
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -121,6 +123,7 @@ function App() {
     }
   }, [location.pathname]);
 
+  const isAdminRoute = location.pathname.startsWith('/admin');
   const isAltPage = location.pathname !== '/';
 
   return (
@@ -135,7 +138,7 @@ function App() {
         </svg>
       </div>
 
-      <Navigation isDownloadPage={isAltPage} />
+      {!isAdminRoute ? <Navigation isDownloadPage={isAltPage} /> : null}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -143,6 +146,8 @@ function App() {
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
+        <Route path="/admin" element={<AdminLoginPage />} />
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
