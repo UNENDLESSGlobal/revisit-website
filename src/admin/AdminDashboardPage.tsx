@@ -165,15 +165,15 @@ const adminSetupFiles = [
 
 const adminEnvVariables = [
   {
-    key: 'VITE_SUPABASE_URL',
-    description: 'Base URL for Supabase Auth and REST requests.',
+    key: 'VITE_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_URL',
+    description: 'Base URL for Supabase Auth and REST requests. Either public prefix is supported.',
   },
   {
-    key: 'VITE_SUPABASE_ANON_KEY',
+    key: 'VITE_SUPABASE_ANON_KEY / NEXT_PUBLIC_SUPABASE_ANON_KEY',
     description: 'Anon key used by the website when authenticating admins and reading data through RLS.',
   },
   {
-    key: 'VITE_GOOGLE_APPS_SCRIPT_URL',
+    key: 'VITE_GOOGLE_APPS_SCRIPT_URL / NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL',
     description: 'Deployed web app URL for listing users, adding payments, and loading history.',
   },
 ] as const
@@ -222,7 +222,7 @@ const adminDebugSections = [
     title: 'Google Sheets and Apps Script',
     description: 'Use this when the payment summary is empty, history fails to load, or adding a payment throws an error.',
     items: [
-      'Deploy the Apps Script as a web app and paste that deployment URL into `VITE_GOOGLE_APPS_SCRIPT_URL`.',
+      'Deploy the Apps Script as a web app and paste that deployment URL into `VITE_GOOGLE_APPS_SCRIPT_URL` or `NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL`.',
       'Set the Apps Script properties exactly: spreadsheet IDs, sheet names, `SUPABASE_URL`, and a valid `SUPABASE_SERVICE_ROLE_KEY`.',
       'The `Payments` and `Users` tabs must use the same headers as the CSV templates in `/public/admin-setup`.',
       'After changing Apps Script code or properties, redeploy the web app so the dashboard calls the latest version.',
@@ -573,7 +573,8 @@ const AdminDashboardPage = () => {
 
           {!isGoogleSheetsConfigured ? (
             <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
-              Google Sheets sync is not configured yet. Set `VITE_GOOGLE_APPS_SCRIPT_URL` after deploying the generated Apps Script web app.
+              Google Sheets sync is not configured yet. Set `VITE_GOOGLE_APPS_SCRIPT_URL` or `NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL`
+              after deploying the generated Apps Script web app.
             </div>
           ) : null}
         </div>

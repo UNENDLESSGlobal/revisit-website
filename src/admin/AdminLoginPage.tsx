@@ -3,7 +3,7 @@ import { ArrowLeft, Eye, EyeOff, LockKeyhole, ShieldCheck } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { SEOHead } from '@/components/SEOHead'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { saveAdminSession, loadAdminSession } from './session'
 import { hasAdminAccess, signInWithPassword, signOutFromSupabase } from '@/lib/supabase'
@@ -87,19 +87,20 @@ const AdminLoginPage = () => {
             <h1 className="max-w-xl font-heading text-3xl font-bold tracking-tight text-revisit-text sm:text-4xl md:text-5xl">
               Revisit admin dashboard login
             </h1>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-revisit-text-secondary sm:text-base">
-              Sign in with an existing Supabase account. Access is granted only when the signed-in email is present in the
-              `admin_dashboard` table.
-            </p>
 
-            <div className="mt-6 grid gap-3 text-sm text-revisit-text-secondary sm:mt-8 sm:grid-cols-2 sm:gap-4">
+            <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50/90 p-4 shadow-sm sm:mt-6 sm:p-5">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-700 sm:text-xs">
+                Authorized users only
+              </div>
+              <p className="mt-2 max-w-lg text-sm leading-6 text-amber-950 sm:text-base">
+                Only approved admin accounts can log in to this dashboard.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-3 text-sm text-revisit-text-secondary sm:mt-8 sm:gap-4">
               <div className="rounded-2xl border border-revisit-border bg-white/70 p-4 sm:rounded-3xl sm:p-5">
                 <div className="mb-2 font-semibold text-revisit-text">No sign-up route</div>
-                Only existing admin users can enter this area.
-              </div>
-              <div className="rounded-2xl border border-revisit-border bg-white/70 p-4 sm:rounded-3xl sm:p-5">
-                <div className="mb-2 font-semibold text-revisit-text">Env-based credentials</div>
-                The website reads Supabase and Google Apps Script endpoints from env variables.
+                Access is limited to existing authorized admin users.
               </div>
             </div>
           </div>
@@ -110,7 +111,6 @@ const AdminLoginPage = () => {
                 <LockKeyhole className="h-5 w-5 text-revisit-accent" />
                 Sign in
               </CardTitle>
-              <CardDescription>Use the same email and password as the authorized admin account in Supabase Auth.</CardDescription>
             </CardHeader>
             <CardContent className="px-5 pb-6 sm:px-6">
               <form className="space-y-4" onSubmit={handleSubmit}>

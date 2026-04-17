@@ -1,3 +1,5 @@
+import { readPublicEnv } from './public-env'
+
 export type AuthenticatedSupabaseSession = {
   accessToken: string
   refreshToken: string
@@ -37,10 +39,10 @@ type AuthResponse = {
 }
 
 const missingEnvMessage =
-  'Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.'
+  'Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY, or NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.'
 
-export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? ''
-export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY ?? ''
+export const SUPABASE_URL = readPublicEnv('VITE_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_URL')
+export const SUPABASE_ANON_KEY = readPublicEnv('VITE_SUPABASE_ANON_KEY', 'NEXT_PUBLIC_SUPABASE_ANON_KEY')
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase()
 

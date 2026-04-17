@@ -1,3 +1,5 @@
+import { readPublicEnv } from './public-env'
+
 export type PaymentPlan = 'monthly' | 'yearly'
 
 export type SheetUserSummary = {
@@ -28,7 +30,7 @@ type GoogleSheetsResponse<T> = {
   error?: string
 }
 
-const GOOGLE_APPS_SCRIPT_URL = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL ?? ''
+const GOOGLE_APPS_SCRIPT_URL = readPublicEnv('VITE_GOOGLE_APPS_SCRIPT_URL', 'NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL')
 
 export const isGoogleSheetsConfigured = Boolean(GOOGLE_APPS_SCRIPT_URL)
 
