@@ -24,15 +24,35 @@ export type PaymentHistoryEntry = {
   recordedAt: string
 }
 
+export type FeedbackSheetName = 'Bugs' | 'Features'
+
+export type FeedbackEntry = {
+  row: number
+  timestamp: string
+  title: string
+  description: string
+  email: string
+  status: boolean
+}
+
 type GoogleSheetsResponse<T> = {
   ok: boolean
   data: T
   error?: string
 }
 
-const GOOGLE_APPS_SCRIPT_URL = readPublicEnv('VITE_GOOGLE_APPS_SCRIPT_URL', 'NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL')
+const PAYMENTS_GOOGLE_APPS_SCRIPT_URL = readPublicEnv(
+  'VITE_GOOGLE_APPS_SCRIPT_URL',
+  'NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL',
+)
 
-export const isGoogleSheetsConfigured = Boolean(GOOGLE_APPS_SCRIPT_URL)
+const FEEDBACK_GOOGLE_APPS_SCRIPT_URL = readPublicEnv(
+  'VITE_FEEDBACK_GOOGLE_APPS_SCRIPT_URL',
+  'NEXT_PUBLIC_FEEDBACK_GOOGLE_APPS_SCRIPT_URL',
+)
+
+export const isGoogleSheetsConfigured = Boolean(PAYMENTS_GOOGLE_APPS_SCRIPT_URL)
+export const isFeedbackGoogleSheetsConfigured = Boolean(FEEDBACK_GOOGLE_APPS_SCRIPT_URL)
 
 export function normalizePaymentDateInput(value: string) {
   const trimmed = value.trim()
@@ -78,12 +98,37 @@ const parseResponse = async <T>(response: Response) => {
   return parsed.data
 }
 
+const parseSheetBoolean = (value: boolean | string | number | null | undefined) => {
+  if (typeof value === 'boolean') {
+    return value
+  }
+
+  if (typeof value === 'number') {
+    return value !== 0
+  }
+
+  if (typeof value === 'string') {
+    return value.trim().toLowerCase() === 'true'
+  }
+
+  return false
+}
+
+const normalizeFeedbackEntry = (entry: Partial<FeedbackEntry> & { row?: number | string; status?: boolean | string | number | null }) => ({
+  row: typeof entry.row === 'number' ? entry.row : Number(entry.row || 0),
+  timestamp: entry.timestamp?.toString().trim() || '',
+  title: entry.title?.toString().trim() || '',
+  description: entry.description?.toString().trim() || '',
+  email: entry.email?.toString().trim() || '',
+  status: parseSheetBoolean(entry.status),
+})
+
 export async function fetchSheetUsers() {
-  if (!GOOGLE_APPS_SCRIPT_URL) {
+  if (!PAYMENTS_GOOGLE_APPS_SCRIPT_URL) {
     return [] as SheetUserSummary[]
   }
 
-  const url = new URL(GOOGLE_APPS_SCRIPT_URL)
+  const url = new URL(PAYMENTS_GOOGLE_APPS_SCRIPT_URL)
   url.searchParams.set('action', 'listUsers')
 
   const response = await fetch(url.toString(), { method: 'GET' })
@@ -91,11 +136,11 @@ export async function fetchSheetUsers() {
 }
 
 export async function fetchPaymentHistory(email: string) {
-  if (!GOOGLE_APPS_SCRIPT_URL) {
+  if (!PAYMENTS_GOOGLE_APPS_SCRIPT_URL) {
     throw new Error('Google Apps Script URL is not configured.')
   }
 
-  const url = new URL(GOOGLE_APPS_SCRIPT_URL)
+  const url = new URL(PAYMENTS_GOOGLE_APPS_SCRIPT_URL)
   url.searchParams.set('action', 'paymentHistory')
   url.searchParams.set('email', email)
 
@@ -108,11 +153,11 @@ export async function addPaymentRecord(payload: {
   plan: PaymentPlan
   paidOn: string
 }) {
-  if (!GOOGLE_APPS_SCRIPT_URL) {
+  if (!PAYMENTS_GOOGLE_APPS_SCRIPT_URL) {
     throw new Error('Google Apps Script URL is not configured.')
   }
 
-  const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+  const response = await fetch(PAYMENTS_GOOGLE_APPS_SCRIPT_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain;charset=utf-8',
@@ -127,4 +172,47 @@ export async function addPaymentRecord(payload: {
     summary: SheetUserSummary
     payment: PaymentHistoryEntry
   }>(response)
+}
+
+export async function fetchFeedbackEntries(sheet: FeedbackSheetName) {
+  if (!FEEDBACK_GOOGLE_APPS_SCRIPT_URL) {
+    throw new Error('Feedback Google Apps Script URL is not configured.')
+  }
+
+  const url = new URL(FEEDBACK_GOOGLE_APPS_SCRIPT_URL)
+  url.searchParams.set('action', 'listFeedback')
+  url.searchParams.set('sheet', sheet)
+
+  const response = await fetch(url.toString(), { method: 'GET' })
+  const data = await parseResponse<Array<Partial<FeedbackEntry> & { row?: number | string; status?: boolean | string | number | null }>>(response)
+
+  return data.map(normalizeFeedbackEntry)
+}
+
+export async function updateFeedbackStatus(payload: {
+  sheet: FeedbackSheetName
+  row: number
+  status: boolean
+}) {
+  if (!FEEDBACK_GOOGLE_APPS_SCRIPT_URL) {
+    throw new Error('Feedback Google Apps Script URL is not configured.')
+  }
+
+  const response = await fetch(FEEDBACK_GOOGLE_APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8',
+    },
+    body: JSON.stringify({
+      action: 'updateFeedbackStatus',
+      ...payload,
+    }),
+  })
+
+  const data = await parseResponse<Partial<FeedbackEntry> & { row?: number | string; status?: boolean | string | number | null }>(response)
+  return normalizeFeedbackEntry({
+    ...data,
+    row: data.row ?? payload.row,
+    status: data.status ?? payload.status,
+  })
 }

@@ -47,6 +47,7 @@ import {
   type ProfileRecord,
 } from '@/lib/supabase'
 import { clearAdminSession, ensureFreshAdminSession, loadAdminSession } from './session'
+import FeedbacksPanel from './FeedbacksPanel'
 
 type DashboardRecord = ProfileRecord & {
   sheetSummary?: SheetUserSummary
@@ -121,6 +122,7 @@ const AdminDashboardPage = () => {
   const [paymentEmail, setPaymentEmail] = useState('')
   const [paymentPlan, setPaymentPlan] = useState<PaymentPlan>('monthly')
   const [paidOn, setPaidOn] = useState(() => new Date().toISOString().slice(0, 10))
+  const [feedbackRefreshToken, setFeedbackRefreshToken] = useState(0)
 
   const filteredRecords = useMemo(() => {
     const normalizedSearch = normalizeEmail(searchQuery)
@@ -245,6 +247,7 @@ const AdminDashboardPage = () => {
       }
 
       await loadData(activeSession)
+      setFeedbackRefreshToken((currentToken) => currentToken + 1)
     } catch (caughtError) {
       const message =
         caughtError instanceof Error ? caughtError.message : 'Failed to refresh the dashboard.'
@@ -613,6 +616,8 @@ const AdminDashboardPage = () => {
             </Card>
           </div>
         </div>
+
+        <FeedbacksPanel refreshToken={feedbackRefreshToken} />
       </div>
 
       <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
