@@ -68,6 +68,17 @@ const TermsPage = () => {
           <h3 className="font-heading font-bold text-xl text-revisit-text pt-4">Artificial Intelligence</h3>
           <p>The Application uses Groq's API to power its AI features. By using AI-powered features within the Application, you acknowledge that your data may be processed by Groq's API to generate responses. The Service Provider does not use your data to train AI models. Use of Groq is subject to <a href="https://groq.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="text-revisit-accent hover:underline font-medium">Groq's Terms of Use</a>.</p>
 
+          <h3 className="font-heading font-bold text-xl text-revisit-text pt-4">Excessive Use and API Rate Limiting</h3>
+          <p>The Application utilizes Groq's API infrastructure to deliver artificial intelligence features and services through the Revisit platform operated by Cynocyte. Groq, as the third-party API provider, retains the exclusive right to monitor, regulate, and enforce usage policies pertaining to the API and its associated services.</p>
+          
+          <p>You acknowledge and agree that excessive, abusive, or unauthorized use of the AI features within the Application may constitute a violation of Groq's acceptable use policy. Excessive use is defined as, but not limited to: (a) exceeding reasonable usage limits as defined by Groq's Terms of Use; (b) automated, repetitive, or bulk requests made without proper authorization; (c) using the Service in any manner that interferes with or impairs the integrity, availability, or performance of the API; or (d) any other use that violates Groq's Terms of Service or constitutes an abuse of the platform.</p>
+
+          <p>In the event that your account or usage is determined to be in violation of these policies, Groq reserves the right to: (i) throttle your API access, thereby reducing the frequency, speed, or quality of responses provided by the AI features; (ii) temporarily suspend your access to AI functionalities for a specified period; (iii) permanently revoke your access to the Service; or (iv) pursue any other remedies available under applicable law or their Terms of Use.</p>
+
+          <p>The Service Provider (Cynocyte) shall not be held liable for any interruption, limitation, throttling, or suspension of AI services resulting from Groq's enforcement of their usage policies or terms. Any suspension or throttling of services initiated by Groq is beyond the control of Cynocyte and is the exclusive decision of Groq as the API provider. You agree to comply with all terms and conditions set forth by Groq and to use the AI features in a manner that is consistent with their acceptable use policies.</p>
+
+          <p>For detailed information regarding API usage limits, rate limiting, and Groq's acceptable use policies, please refer to <a href="https://groq.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="text-revisit-accent hover:underline font-medium">Groq's Terms of Use</a> and their official documentation.</p>
+
           <h3 className="font-heading font-bold text-xl text-revisit-text pt-4">Email Communication</h3>
           <p>By creating an account, you agree to receive emails from the Service Provider at cynocyte@gmail.com for account verification, important notices, and occasional marketing communications. Your email address will not be shared with third parties for marketing purposes.</p>
 
