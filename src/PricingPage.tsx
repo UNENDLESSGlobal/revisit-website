@@ -12,17 +12,18 @@ import { SEOHead } from './components/SEOHead';
 
 const yearlyPrice = 999;
 const monthlyPrice = 99;
-const yearlySavings = (monthlyPrice * 12) - yearlyPrice;
+const yearlySavings = (monthlyPrice * 13) - yearlyPrice;
+const effectiveMonthlyCost = (yearlyPrice / 13).toFixed(0);
 
 const topSignals = [
   {
-    value: '₹83/mo',
+    value: `₹${effectiveMonthlyCost}/month`,
     label: 'effective monthly cost on yearly billing',
     valueClassName: 'text-revisit-accent',
   },
   {
     value: `₹${yearlySavings} saved`,
-    label: 'compared with paying monthly for 12 months',
+    label: 'compared with paying monthly for a year',
     valueClassName: 'text-emerald-600',
   },
   {
@@ -226,7 +227,7 @@ const PricingPage = () => {
                 </h2>
                 <p className="text-revisit-text-secondary mt-3 text-sm md:text-base max-w-xl">
                   Remove monthly decision fatigue, keep the app ad-free, and bring the effective cost
-                  down to just ₹83 per month.
+                  down to just ₹{effectiveMonthlyCost} per month.
                 </p>
               </div>
 
@@ -236,8 +237,8 @@ const PricingPage = () => {
                   <span className="text-revisit-accent/80 text-base">/year</span>
                 </div>
                 <div className="pb-2">
-                  <div className="text-sm text-revisit-text-secondary line-through">₹1,188 billed monthly</div>
-                  <div className="text-sm font-semibold text-emerald-600">Only ₹83/month effective price</div>
+                  <div className="text-sm text-revisit-text-secondary line-through">₹99 billed monthly</div>
+                  <div className="text-sm font-semibold text-emerald-600">Only ₹{effectiveMonthlyCost}/month effective price</div>
                 </div>
               </div>
 
@@ -435,6 +436,12 @@ const PricingPage = () => {
               </p>
             </div>
           </div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <p className="text-xs text-revisit-text-secondary font-light tracking-tight leading-relaxed">
+            <span>Note: For pricing calculations, 1 month equals 28 days and 1 year equals 365 days.</span>
+          </p>
         </div>
       </div>
     </div>
