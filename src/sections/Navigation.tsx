@@ -108,7 +108,12 @@ const Navigation = ({ isDownloadPage }: NavigationProps) => {
               ) : (
                 <button
                   key={link.label}
-                  onClick={() => { setIsMobileMenuOpen(false); link.action && link.action(); }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    if (link.action) {
+                      link.action();
+                    }
+                  }}
                   className="text-2xl font-heading font-semibold text-revisit-text hover:text-revisit-accent transition-colors"
                 >
                   {link.label}

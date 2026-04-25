@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
 import { fetchPublicDownloadUrl } from './lib/supabase';
 
+const trackDownloadClick = (eventLabel: string) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  window.gtag?.('event', 'apk_download_click', {
+    event_category: 'engagement',
+    event_label: eventLabel,
+  });
+};
+
 const DownloadPage = () => {
   const [downloadUrl, setDownloadUrl] = useState<string>('#');
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -53,15 +64,7 @@ const DownloadPage = () => {
         <div className="glass-card-strong w-full max-w-md p-8 flex flex-col items-center">
           <a
             href={downloadUrl}
-            onClick={() => {
-              if (typeof window !== 'undefined' && 'gtag' in window) {
-                // @ts-ignore - gtag is loaded via index.html
-                window.gtag('event', 'apk_download_click', {
-                  'event_category': 'engagement',
-                  'event_label': 'download_page_icon_cta'
-                });
-              }
-            }}
+            onClick={() => trackDownloadClick('download_page_icon_cta')}
             className={`flex items-center justify-center mb-8 transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'cursor-pointer hover:scale-105 active:scale-95'}`}
           >
             <img src="/assets/logo_light.png" alt="Revisit" className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-xl" />
@@ -74,15 +77,7 @@ const DownloadPage = () => {
 
           <a
             href={downloadUrl}
-            onClick={() => {
-              if (typeof window !== 'undefined' && 'gtag' in window) {
-                // @ts-ignore - gtag is loaded via index.html
-                window.gtag('event', 'apk_download_click', {
-                  'event_category': 'engagement',
-                  'event_label': 'download_page_cta'
-                });
-              }
-            }}
+            onClick={() => trackDownloadClick('download_page_cta')}
             className={`w-full flex items-center justify-center gap-3 px-8 py-4 bg-revisit-accent text-white font-semibold rounded-full transition-all duration-300 ${isLoading ? 'opacity-70 pointer-events-none' : 'hover:bg-revisit-accent-dark hover:shadow-lg hover:-translate-y-1 active:scale-95'}`}
           >
             {isLoading ? (

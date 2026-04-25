@@ -6,11 +6,7 @@ import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface HeroSectionProps {
-  onDownloadClick?: () => void; // Keeping prop for backwards compatibility but not using it
-}
-
-const HeroSection = ({ }: HeroSectionProps) => {
+const HeroSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);

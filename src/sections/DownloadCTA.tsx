@@ -6,11 +6,7 @@ import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface DownloadCTAProps {
-  onDownloadClick?: () => void;
-}
-
-const DownloadCTA = ({ }: DownloadCTAProps) => {
+const DownloadCTA = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);

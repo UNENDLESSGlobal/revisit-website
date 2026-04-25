@@ -37,7 +37,7 @@ import {
   type PaymentHistoryEntry,
   type PaymentPlan,
   type SheetUserSummary,
-} from '@/lib/google-sheets'
+} from '@/lib/google-sheets-client'
 import {
   fetchProfiles,
   hasAdminAccess,
@@ -102,6 +102,13 @@ const buildSheetSummaryMap = (items: SheetUserSummary[]) =>
     return accumulator
   }, {})
 
+const toProfileSubscription = (plan: PaymentPlan) => (plan === 'yearly' ? 'premium' : plan)
+
+const resolveCurrentPlan = (profile: DashboardRecord | ProfileRecord) =>
+  ('sheetSummary' in profile ? profile.sheetSummary?.currentPlan : '') || profile.plan
+
+const normalizeProfileName = (value: string | null | undefined) => value?.trim().toLowerCase() || ''
+
 const AdminDashboardPage = () => {
   const navigate = useNavigate()
   const [session, setSession] = useState<AuthenticatedSupabaseSession | null>(null)
@@ -125,7 +132,7 @@ const AdminDashboardPage = () => {
   const [feedbackRefreshToken, setFeedbackRefreshToken] = useState(0)
 
   const filteredRecords = useMemo(() => {
-    const normalizedSearch = normalizeEmail(searchQuery)
+    const normalizedSearch = searchQuery.trim().toLowerCase()
     const records = profiles.map<DashboardRecord>((profile) => ({
       ...profile,
       sheetSummary: sheetSummaryMap[normalizeEmail(profile.email)],
@@ -135,17 +142,26 @@ const AdminDashboardPage = () => {
       return records
     }
 
-    return records.filter((profile) => normalizeEmail(profile.email).includes(normalizedSearch))
+    return records.filter(
+      (profile) =>
+        normalizeEmail(profile.email).includes(normalizedSearch) ||
+        normalizeProfileName(profile.Name).includes(normalizedSearch),
+    )
   }, [profiles, searchQuery, sheetSummaryMap])
 
   const stats = useMemo(() => {
-    const totalUsers = profiles.length
-    const monthlyUsers = profiles.filter((profile) => profile.subscription === 'monthly').length
-    const yearlyUsers = profiles.filter((profile) => profile.subscription === 'yearly').length
-    const expiringSoon = profiles.filter((profile) => isExpiringSoon(profile.plan_expires_at)).length
+    const records = profiles.map<DashboardRecord>((profile) => ({
+      ...profile,
+      sheetSummary: sheetSummaryMap[normalizeEmail(profile.email)],
+    }))
+
+    const totalUsers = records.length
+    const monthlyUsers = records.filter((profile) => resolveCurrentPlan(profile) === 'monthly').length
+    const yearlyUsers = records.filter((profile) => resolveCurrentPlan(profile) === 'yearly').length
+    const expiringSoon = records.filter((profile) => isExpiringSoon(profile.plan_expires_at)).length
 
     return { totalUsers, monthlyUsers, yearlyUsers, expiringSoon }
-  }, [profiles])
+  }, [profiles, sheetSummaryMap])
 
   const syncSession = async (existingSession?: AuthenticatedSupabaseSession | null) => {
     const storedSession = existingSession ?? loadAdminSession()
@@ -323,9 +339,7 @@ const AdminDashboardPage = () => {
       })
 
       const updatedProfile = await updateProfilePlan(matchingProfile.id, activeSession.accessToken, {
-        plan: result.summary.currentPlan || paymentPlan,
-        subscription: result.summary.currentPlan || paymentPlan,
-        plan_expires_at: result.summary.currentPlanExpiresAt || null,
+        subscription: toProfileSubscription(paymentPlan),
       })
 
       setProfiles((currentProfiles) =>
@@ -476,7 +490,7 @@ const AdminDashboardPage = () => {
                 <div>
                   <CardTitle className="font-heading text-2xl">Plans overview</CardTitle>
                   <CardDescription>
-                    Email, plan, expiry, sign-up date, last payment date, and Google Sheets carry-forward data.
+                    Name, email, Supabase plan, current payment plan, expiry, and Google Sheets carry-forward data.
                   </CardDescription>
                 </div>
 
@@ -485,7 +499,7 @@ const AdminDashboardPage = () => {
                   <Input
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    placeholder="Search email"
+                    placeholder="Search name or email"
                     className="h-11 rounded-2xl border-revisit-border bg-revisit-bg/70 pl-10"
                   />
                 </div>
@@ -498,8 +512,10 @@ const AdminDashboardPage = () => {
               <Table className="min-w-[760px]" containerClassName="pb-2 [scrollbar-gutter:stable]">
                 <TableHeader>
                   <TableRow>
+                    <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Subscription</TableHead>
+                    <TableHead>Plan</TableHead>
+                    <TableHead>Current plan</TableHead>
                     <TableHead>Plan expiry</TableHead>
                     <TableHead>Created</TableHead>
                     <TableHead>Last payment</TableHead>
@@ -511,10 +527,12 @@ const AdminDashboardPage = () => {
                   {filteredRecords.length ? (
                     filteredRecords.map((profile) => (
                       <TableRow key={profile.id}>
+                        <TableCell>{profile.Name || '—'}</TableCell>
                         <TableCell className="max-w-[18rem] whitespace-normal font-medium text-revisit-text">
                           {profile.email}
                         </TableCell>
-                        <TableCell>{formatPlan(profile.subscription)}</TableCell>
+                        <TableCell>{formatPlan(profile.plan)}</TableCell>
+                        <TableCell>{formatPlan(resolveCurrentPlan(profile))}</TableCell>
                         <TableCell>{formatDate(profile.plan_expires_at)}</TableCell>
                         <TableCell>{formatDate(profile.created_at)}</TableCell>
                         <TableCell>{formatDate(profile.sheetSummary?.lastPaymentDate)}</TableCell>
@@ -534,7 +552,7 @@ const AdminDashboardPage = () => {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={7} className="py-10 text-center text-revisit-text-secondary">
+                      <TableCell colSpan={9} className="py-10 text-center text-revisit-text-secondary">
                         No users matched the current search.
                       </TableCell>
                     </TableRow>

@@ -11,7 +11,7 @@ import {
   updateFeedbackStatus,
   type FeedbackEntry,
   type FeedbackSheetName,
-} from '@/lib/google-sheets'
+} from '@/lib/google-sheets-client'
 
 const FEEDBACK_SHEETS: FeedbackSheetName[] = ['Bugs', 'Features']
 

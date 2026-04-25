@@ -26,7 +26,7 @@ const Footer = () => {
       } else {
         setNewsletterStatus('error');
       }
-    } catch (e) {
+    } catch {
       setNewsletterStatus('error');
     }
   };

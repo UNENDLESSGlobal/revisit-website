@@ -48,6 +48,7 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+src/lib/google-sheets.ts
 
 # Vite (if using Vite)
 vite.config.ts.timestamp-*

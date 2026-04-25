@@ -81,7 +81,7 @@ const AttendanceSection = () => {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [circumference, targetOffset]);
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen bg-revisit-bg overflow-hidden">
