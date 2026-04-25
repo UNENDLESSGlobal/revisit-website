@@ -140,8 +140,8 @@ const AdminDashboardPage = () => {
 
   const stats = useMemo(() => {
     const totalUsers = profiles.length
-    const monthlyUsers = profiles.filter((profile) => profile.plan === 'monthly').length
-    const yearlyUsers = profiles.filter((profile) => profile.plan === 'yearly').length
+    const monthlyUsers = profiles.filter((profile) => profile.subscription === 'monthly').length
+    const yearlyUsers = profiles.filter((profile) => profile.subscription === 'yearly').length
     const expiringSoon = profiles.filter((profile) => isExpiringSoon(profile.plan_expires_at)).length
 
     return { totalUsers, monthlyUsers, yearlyUsers, expiringSoon }
@@ -324,6 +324,7 @@ const AdminDashboardPage = () => {
 
       const updatedProfile = await updateProfilePlan(matchingProfile.id, activeSession.accessToken, {
         plan: result.summary.currentPlan || paymentPlan,
+        subscription: result.summary.currentPlan || paymentPlan,
         plan_expires_at: result.summary.currentPlanExpiresAt || null,
       })
 
@@ -498,7 +499,7 @@ const AdminDashboardPage = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Email</TableHead>
-                    <TableHead>Plan</TableHead>
+                    <TableHead>Subscription</TableHead>
                     <TableHead>Plan expiry</TableHead>
                     <TableHead>Created</TableHead>
                     <TableHead>Last payment</TableHead>
@@ -513,7 +514,7 @@ const AdminDashboardPage = () => {
                         <TableCell className="max-w-[18rem] whitespace-normal font-medium text-revisit-text">
                           {profile.email}
                         </TableCell>
-                        <TableCell>{formatPlan(profile.plan)}</TableCell>
+                        <TableCell>{formatPlan(profile.subscription)}</TableCell>
                         <TableCell>{formatDate(profile.plan_expires_at)}</TableCell>
                         <TableCell>{formatDate(profile.created_at)}</TableCell>
                         <TableCell>{formatDate(profile.sheetSummary?.lastPaymentDate)}</TableCell>
@@ -581,6 +582,7 @@ const AdminDashboardPage = () => {
                         <SelectContent>
                           <SelectItem value="monthly">Monthly (28 days)</SelectItem>
                           <SelectItem value="yearly">Yearly (365 days)</SelectItem>
+                          <SelectItem value="lifetime">Lifetime</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

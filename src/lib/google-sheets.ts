@@ -1,6 +1,6 @@
 import { readPublicEnv } from './public-env'
 
-export type PaymentPlan = 'monthly' | 'yearly'
+export type PaymentPlan = 'monthly' | 'yearly' | 'lifetime'
 
 export type SheetUserSummary = {
   email: string

@@ -17,6 +17,7 @@ export type ProfileRecord = {
   id: string
   email: string
   plan: string | null
+  subscription: string | null
   created_at: string | null
   plan_expires_at: string | null
 }
@@ -162,7 +163,7 @@ export async function subscribeToNewsletter(email: string) {
 
 export async function fetchProfiles(accessToken: string) {
   const response = await supabaseFetch(
-    '/rest/v1/profiles?select=id,email,plan,plan_expires_at,created_at&order=created_at.desc.nullslast',
+    '/rest/v1/profiles?select=id,email,plan,subscription,plan_expires_at,created_at&order=created_at.desc.nullslast',
     { accessToken },
   )
 
@@ -213,7 +214,7 @@ export async function hasAdminAccess(email: string, accessToken: string): Promis
 export async function updateProfilePlan(
   profileId: string,
   accessToken: string,
-  updates: Pick<ProfileRecord, 'plan' | 'plan_expires_at'>,
+  updates: Pick<ProfileRecord, 'plan' | 'subscription' | 'plan_expires_at'>,
 ) {
   const response = await supabaseFetch(`/rest/v1/profiles?id=eq.${profileId}`, {
     method: 'PATCH',
