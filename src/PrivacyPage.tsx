@@ -11,9 +11,10 @@ const PrivacyPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 md:px-12 items-center">
       <SEOHead 
-        title="Privacy Policy — Revisit App by Cynocyte"
-        description="Read the Revisit app privacy policy. Covers data collection, Google account access, Supabase storage, AI processing, and your rights."
+        title="Privacy Policy - Revisit App by Cynocyte"
+        description="Read the Revisit privacy policy by Cynocyte covering data collection, Google account access, AI processing, and your rights."
         canonicalPath="/privacy-policy"
+        keywords="revisit privacy policy, cynocyte privacy, student app data policy"
       />
       <Link 
         to="/"

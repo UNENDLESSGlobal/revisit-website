@@ -27,10 +27,11 @@ const Home = () => {
   return (
     <main className="relative" id="main-content">
       <SEOHead 
-        title="Revisit — Student Life Manager App for Android"
-        description="Revisit is a free Android app for students to track attendance, manage tasks, build timetables, and get AI-powered study plans. By Cynocyte."
+        title="Revisit - by Cynocyte | Free Student Life Manager App for Android"
+        description="Revisit is a free Android app by Cynocyte for students to manage attendance, tasks, timetables, exams, and get AI-powered study plans. Download now."
         canonicalPath="/"
         isHome={true}
+        keywords="student manager app, student daily life management, academic manager android, free student planner, revisit app, cynocyte, swarnadeep mukherjee, unendless, attendance tracker, AI study plan, exam countdown, study alarm, student routine builder"
       />
       <div className="relative z-10">
         <HeroSection />

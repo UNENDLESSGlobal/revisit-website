@@ -62,6 +62,7 @@ const DownloadCTA = () => {
           <p className="text-revisit-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-10">
             Download Revisit and start the day with clarity. Fast, secure, and ready when you are.
           </p>
+          <p className="sr-only">Download the best free student manager app for Android. Revisit by Cynocyte helps students track academics, attendance, tasks, routines, and get AI study plans.</p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/download" className="btn-primary flex items-center gap-3 px-10 py-5 text-lg rounded-full shadow-lg">

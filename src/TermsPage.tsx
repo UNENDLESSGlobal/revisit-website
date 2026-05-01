@@ -11,9 +11,10 @@ const TermsPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 md:px-12 items-center">
       <SEOHead 
-        title="Terms & Conditions — Revisit App by Cynocyte"
-        description="Read the Revisit app terms and conditions covering the freemium model, Google account access, AI usage, and third-party services."
+        title="Terms & Conditions - Revisit App by Cynocyte"
+        description="Read Revisit's terms and conditions by Cynocyte covering the freemium model, AI usage, Google access, and third-party services."
         canonicalPath="/terms-and-conditions"
+        keywords="revisit terms, cynocyte terms of service, student app terms"
       />
       <Link 
         to="/"

@@ -70,6 +70,7 @@ const FeaturesGrid = () => {
           <p className="text-revisit-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
             Revisit brings your calendar, tasks, attendance, and AI into one calm workspace.
           </p>
+          <p className="sr-only">Revisit is a free student daily life management app for Android featuring attendance tracking, task management, study alarms, exam countdown, AI-powered academic planning, Google Calendar sync, and more. Made by Swarnadeep Mukherjee under Cynocyte, a subsidiary of Unendless.</p>
         </div>
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

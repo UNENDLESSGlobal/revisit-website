@@ -91,6 +91,7 @@ const HeroSection = () => {
           <h1 className="font-heading text-5xl sm:text-6xl lg:text-[5.5rem] font-bold text-revisit-text tracking-tight leading-[1.1] w-full px-4 break-words">
             Your daily life. <span className="text-gradient">REVISITed.</span>
           </h1>
+          <h2 className="sr-only">Free Student Manager App for Android - Academic Planner, Attendance Tracker &amp; AI Study Planner by Cynocyte</h2>
         </div>
 
         <p ref={subheadlineRef} className="text-center text-revisit-text-secondary text-base sm:text-xl max-w-4xl mb-6 px-4 font-medium">

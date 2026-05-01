@@ -38,9 +38,10 @@ const DownloadPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
       <SEOHead
-        title="Download Revisit — Free Student Manager App for Android"
-        description="Download the Revisit Android app for free. Manage your classes, track attendance, stay on top of tasks, and get AI study plans."
+        title="Download Revisit App - Free Student Manager for Android | Cynocyte"
+        description="Download Revisit for free on Android. Track attendance, manage tasks, build routines, get AI study plans. By Cynocyte."
         canonicalPath="/download"
+        keywords="download revisit app, student manager apk, free android student app, academic planner download, cynocyte app download"
       />
       <Link
         to="/"

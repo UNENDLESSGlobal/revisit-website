@@ -1,0 +1,20 @@
+{
+  "name": "Revisit - Student Life Manager by Cynocyte",
+  "short_name": "Revisit",
+  "description": "Free Android app for students to manage attendance, tasks, timetables, exams, and get AI-powered study plans. By Cynocyte.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F7FB",
+  "theme_color": "#7B61FF",
+  "icons": [
+    {
+      "src": "/assets/logo_light.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "en",
+  "orientation": "portrait"
+}

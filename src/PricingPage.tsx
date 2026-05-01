@@ -92,9 +92,10 @@ const PricingPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
       <SEOHead
-        title="Revisit Pricing — Free & Premium Plans for Students"
-        description="Compare Revisit Free and Premium plans. Upgrade for an ad-free experience, unlimited AI access, and yearly savings at ₹999/year or ₹99/month."
+        title="Revisit Pricing - Free & Premium Plans | Cynocyte"
+        description="Compare Revisit Free and Premium plans. Ad-free experience, unlimited AI, yearly savings. Student manager app by Cynocyte."
         canonicalPath="/pricing"
+        keywords="revisit pricing, student app free plan, premium student planner, cynocyte revisit premium"
       />
 
       <Link

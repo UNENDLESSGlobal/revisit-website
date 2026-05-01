@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /*?*
+Disallow: /admin
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
 
 Sitemap: https://revisitstudentmanager.vercel.app/sitemap.xml
