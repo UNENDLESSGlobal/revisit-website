@@ -85,9 +85,9 @@ export const SEOHead = ({
       <meta name="twitter:image:alt" content="Revisit App Logo" />
 
       {/* Hreflang Tags */}
-      <link rel="alternate" hreflang="en" href={`${domain}${canonicalPath}`} />
-      <link rel="alternate" hreflang="en-IN" href={`${domain}${canonicalPath}`} />
-      <link rel="alternate" hreflang="x-default" href={`${domain}${canonicalPath}`} />
+      <link rel="alternate" hrefLang="en" href={`${domain}${canonicalPath}`} />
+      <link rel="alternate" hrefLang="en-IN" href={`${domain}${canonicalPath}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${domain}${canonicalPath}`} />
 
       {/* Global Schemas (Organization & Person) */}
       <script type="application/ld+json">

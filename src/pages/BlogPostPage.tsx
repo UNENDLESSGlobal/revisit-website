@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Clock, CalendarDays, User, Download, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Clock, CalendarDays, ExternalLink } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { blogPosts } from '../data/blog-posts';
 import { Helmet } from 'react-helmet-async';

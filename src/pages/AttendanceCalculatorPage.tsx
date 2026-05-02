@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Check, X, Calculator, ShieldCheck, Download, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Check, X, Calculator, Download, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
 import { Helmet } from 'react-helmet-async';

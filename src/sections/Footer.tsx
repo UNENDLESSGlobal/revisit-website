@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Twitter, Instagram, Mail, Heart, Youtube, MessageSquare, MessageCircle, Linkedin } from 'lucide-react';
+import { Twitter, Instagram, Heart, Youtube, MessageSquare, MessageCircle, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { subscribeToNewsletter } from '../lib/supabase';
 
