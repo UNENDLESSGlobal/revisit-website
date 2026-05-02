@@ -6,5 +6,8 @@
       "destination": "https://getrevisit.vercel.app/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
