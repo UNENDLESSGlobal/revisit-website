@@ -111,7 +111,7 @@
     }
     </script>
 
-  <!-- JSON-LD: Organization -->
+  <!-- JSON-LD: Organization (Master Ecosystem Map) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -123,15 +123,45 @@
       "email": "cynocyte@gmail.com",
       "description": "Cynocyte is a tech and software company building apps and tools for students and businesses. A subsidiary of Unendless.",
       "foundingDate": "2026",
+      "sameAs": [
+        "https://www.instagram.com/cynocyte/",
+        "https://www.instagram.com/cynocyteindia/",
+        "https://x.com/cynocyte",
+        "https://www.youtube.com/@cynocyte",
+        "https://www.reddit.com/user/cynocyte/",
+        "https://www.threads.net/@cynocyte"
+      ],
       "founder": {
-        "@id": "https://unendless.vercel.app/#founder"
+        "@type": "Person",
+        "@id": "https://unendless.vercel.app/#founder",
+        "name": "Swarnadeep Mukherjee",
+        "sameAs": [
+          "https://www.linkedin.com/in/swarnadeepmukherjee-unendless/",
+          "https://x.com/theswarnadeep_",
+          "https://www.instagram.com/theswarnadeep_/",
+          "https://www.threads.net/@theswarnadeep_",
+          "https://www.reddit.com/user/SwarnadeepMukherjee/"
+        ]
       },
       "parentOrganization": {
-        "@id": "https://unendless.vercel.app/#organization"
+        "@type": "Organization",
+        "@id": "https://unendless.vercel.app/#organization",
+        "name": "UNENDLESS",
+        "url": "https://unendless.vercel.app",
+        "sameAs": [
+          "https://www.instagram.com/unendless.global/"
+        ]
       },
-      "sameAs": [
-        "https://twitter.com/cynocyte",
-        "https://instagram.com/cynocyte"
+      "subOrganization": [
+        {
+          "@type": "Organization",
+          "@id": "https://cynocyte.vercel.app/#systems",
+          "name": "Cynocyte Systems",
+          "url": "https://cynocyte.vercel.app/systems",
+          "sameAs": [
+            "https://www.instagram.com/cynocytesystems/"
+          ]
+        }
       ]
     }
     </script>
