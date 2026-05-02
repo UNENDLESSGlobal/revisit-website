@@ -22,23 +22,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutPage = () => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('.animate-section').forEach((section) => {
-        gsap.fromTo(
-          section,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
+      const sections = gsap.utils.toArray<HTMLElement>('.animate-section');
+      
+      // Animate hero section immediately (it's already in view on load)
+      if (sections.length > 0) {
+        gsap.from(sections[0], {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power3.out',
+          delay: 0.1,
+        });
+      }
+
+      // Animate remaining sections on scroll
+      sections.slice(1).forEach((section) => {
+        gsap.from(section, {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+            invalidateOnRefresh: true,
+          },
+        });
       });
     });
     return () => ctx.revert();
