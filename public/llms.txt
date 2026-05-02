@@ -11,8 +11,8 @@ Revisit is a free Android application designed for students to track attendance,
 - **Premium Beta Version (₹99 until launch)**: Ad-free experience with unlimited AI feature usage.
 
 ## Links
-- Official Website: https://revisitstudentmanager.vercel.app
-- Download Page: https://revisitstudentmanager.vercel.app/download
-- Pricing: https://revisitstudentmanager.vercel.app/pricing 
+- Official Website: https://getrevisit.vercel.app
+- Download Page: https://getrevisit.vercel.app/download
+- Pricing: https://getrevisit.vercel.app/pricing 
 
 Created by Swarnadeep Mukherjee under Cynocyte.

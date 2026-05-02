@@ -15,11 +15,11 @@ export const SEOHead = ({
   description, 
   canonicalPath, 
   type = "website",
-  imageUrl = "https://revisitstudentmanager.vercel.app/assets/logo_light.png",
+  imageUrl = "https://getrevisit.vercel.app/assets/logo_light.png",
   isHome = false,
   keywords = ""
 }: SEOHeadProps) => {
-  const domain = "https://revisitstudentmanager.vercel.app";
+  const domain = "https://getrevisit.vercel.app";
   const url = `${domain}${canonicalPath}`;
 
   // Default keywords that apply globally
@@ -82,32 +82,94 @@ export const SEOHead = ({
       <meta name="twitter:site" content="@cynocyte" />
       <meta name="twitter:creator" content="@cynocyte" />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content="Revisit App Logo" />
 
-      {/* Organization Schema (Global) */}
+      {/* Hreflang Tags */}
+      <link rel="alternate" hreflang="en" href={`${domain}${canonicalPath}`} />
+      <link rel="alternate" hreflang="en-IN" href={`${domain}${canonicalPath}`} />
+      <link rel="alternate" hreflang="x-default" href={`${domain}${canonicalPath}`} />
+
+      {/* Global Schemas (Organization & Person) */}
       <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Cynocyte",
-          "alternateName": "Cynocyte Systems",
-          "url": domain,
-          "email": "cynocyte@gmail.com",
-          "description": "Cynocyte is a tech and software company building apps and tools for students and businesses. A subsidiary of Unendless.",
-          "foundingDate": "2026",
-          "founder": {
-            "@type": "Person",
-            "name": "Swarnadeep Mukherjee"
-          },
-          "parentOrganization": {
+        {JSON.stringify([
+          {
+            "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Unendless",
-            "alternateName": "UNENDLESS"
+            "@id": "https://unendless.vercel.app/#organization",
+            "name": "UNENDLESS",
+            "alternateName": "Unendless",
+            "url": "https://unendless.vercel.app",
+            "description": "UNENDLESS is a multi-sector parent company founded by Swarnadeep Mukherjee. Its subsidiaries include Cynocyte (technology), Cynocyte Systems (software infrastructure), and future ventures including UNENDLESS Studios (media production).",
+            "founder": {
+              "@id": "https://getrevisit.vercel.app/#swarnadeep-mukherjee"
+            },
+            "subOrganization": [
+              {
+                "@type": "Organization",
+                "@id": "https://cynocyte.vercel.app/#organization",
+                "name": "Cynocyte"
+              }
+            ],
+            "sameAs": [
+              "https://www.instagram.com/unendless.global/"
+            ]
           },
-          "sameAs": [
-            "https://twitter.com/cynocyte",
-            "https://instagram.com/cynocyte"
-          ]
-        })}
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://cynocyte.vercel.app/#organization",
+            "name": "Cynocyte",
+            "alternateName": "Cynocyte Systems",
+            "url": domain,
+            "email": "cynocyte@gmail.com",
+            "description": "Cynocyte is a tech and software company building apps and tools for students and businesses. A subsidiary of Unendless.",
+            "foundingDate": "2026",
+            "founder": {
+              "@id": "https://getrevisit.vercel.app/#swarnadeep-mukherjee"
+            },
+            "parentOrganization": {
+              "@id": "https://unendless.vercel.app/#organization"
+            },
+            "sameAs": [
+              "https://www.instagram.com/cynocyte/",
+              "https://www.instagram.com/cynocyteindia/",
+              "https://x.com/cynocyte",
+              "https://www.youtube.com/@cynocyte",
+              "https://www.reddit.com/user/cynocyte/",
+              "https://www.threads.net/@cynocyte"
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": "https://getrevisit.vercel.app/#swarnadeep-mukherjee",
+            "name": "Swarnadeep Mukherjee",
+            "givenName": "Swarnadeep",
+            "familyName": "Mukherjee",
+            "jobTitle": "Founder & CEO",
+            "description": "Swarnadeep Mukherjee is the founder of Cynocyte and creator of the Revisit student life manager app. He leads Cynocyte, a tech subsidiary of UNENDLESS, based in Kolkata, India.",
+            "nationality": "Indian",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Kolkata",
+              "addressRegion": "West Bengal",
+              "addressCountry": "IN"
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Cynocyte",
+              "@id": "https://cynocyte.vercel.app/#organization"
+            },
+            "url": `${domain}/about`,
+            "sameAs": [
+              "https://www.linkedin.com/in/swarnadeepmukherjee-unendless/",
+              "https://x.com/theswarnadeep_",
+              "https://www.instagram.com/theswarnadeep_/",
+              "https://www.threads.net/@theswarnadeep_",
+              "https://www.reddit.com/user/SwarnadeepMukherjee/"
+            ]
+          }
+        ])}
       </script>
 
       {/* BreadcrumbList for subpages */}
@@ -140,7 +202,7 @@ export const SEOHead = ({
           {JSON.stringify([
             {
               "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
+              "@type": "MobileApplication",
               "name": "Revisit",
               "alternateName": "Revisit by Cynocyte",
               "operatingSystem": "Android 5.0 and up",
@@ -163,30 +225,60 @@ export const SEOHead = ({
               ],
               "url": domain,
               "author": {
-                "@type": "Person",
-                "name": "Swarnadeep Mukherjee",
-                "url": domain
+                "@id": "https://getrevisit.vercel.app/#swarnadeep-mukherjee"
               },
               "publisher": {
-                "@type": "Organization",
-                "name": "Cynocyte",
-                "url": domain,
-                "email": "cynocyte@gmail.com"
+                "@id": "https://cynocyte.vercel.app/#organization"
               },
+              "isAccessibleForFree": true,
+              "downloadUrl": `${domain}/download`,
+              "screenshot": [
+                `${domain}/assets/screenshot1_placeholder.png`,
+                `${domain}/assets/screenshot2_placeholder.png`,
+                `${domain}/assets/screenshot3_placeholder.png`
+              ],
               "featureList": [
-                "Attendance tracking with percentage calculation",
+                "Attendance calculation without total classes",
+                "75% UGC attendance rule tracking",
+                "AI study plan generation using Groq",
+                "Google Drive sync",
+                "Google Calendar sync",
                 "Task and reminder management",
                 "Weekly timetable and routine builder",
                 "Monthly calendar with custom events",
                 "AI-powered personalized study plans",
                 "Upcoming exam countdown tracker",
                 "Book progress tracking",
-                "Google Calendar and Drive sync",
                 "Google AdMob ads (Free tier)",
-                "Ad-free Premium experience"
+                "Ad-free Premium experience",
+                "Offline functionality for basic features",
+                "Secure Google Sign-In authentication"
               ],
+              "audience": {
+                "@type": "EducationalAudience",
+                "educationalRole": "student"
+              },
+              "availableOnDevice": "Mobile",
+              "countriesSupported": "IN, US, GB, AU, CA",
               "datePublished": "2026-04-14",
               "inLanguage": "en"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "SoftwareSourceCode",
+              "name": "Revisit by Cynocyte",
+              "creator": {
+                "@id": "https://getrevisit.vercel.app/#swarnadeep-mukherjee"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": "Revisit App Demo - Student Life Manager by Cynocyte",
+              "description": "See how Revisit helps students manage attendance, tasks, timetables, and get AI-powered study plans. Free Android app by Cynocyte.",
+              "thumbnailUrl": `${domain}/assets/logo_light.png`,
+              "uploadDate": "2026-04-14",
+              "contentUrl": "https://www.youtube.com/@cynocyte"
             },
             {
               "@context": "https://schema.org",
@@ -196,8 +288,7 @@ export const SEOHead = ({
               "url": domain,
               "description": "Official website for the Revisit student life manager Android app by Cynocyte.",
               "publisher": {
-                "@type": "Organization",
-                "name": "Cynocyte"
+                "@id": "https://cynocyte.vercel.app/#organization"
               },
               "potentialAction": {
                 "@type": "SearchAction",
@@ -299,20 +390,90 @@ export const SEOHead = ({
                     "@type": "Answer",
                     "text": "Yes, Revisit includes an AI-powered study planner that analyzes your exams, syllabus, and reading progress to create personalized, date-wise study schedules."
                   }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Who is Swarnadeep Mukherjee?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Swarnadeep Mukherjee is the founder and CEO of Cynocyte, a technology company based in Kolkata, India. He is the creator of Revisit, a free student life management app for Android. Swarnadeep built Revisit to help Indian students manage attendance, tasks, timetables, and get AI-powered study plans in one app. Cynocyte is a subsidiary of UNENDLESS, a multi-sector parent company."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is Cynocyte?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cynocyte is a technology company founded by Swarnadeep Mukherjee in 2026 as a subsidiary of UNENDLESS. Cynocyte builds software products for students and businesses. Its first product is Revisit, a free Android app for student life management. The company also includes Cynocyte Systems, a software infrastructure sub-division."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is UNENDLESS?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "UNENDLESS is a parent company founded by Swarnadeep Mukherjee that owns and operates multiple subsidiaries including Cynocyte (technology) and future ventures like UNENDLESS Studios (media production). It operates similarly to a holding company structure."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can Revisit track attendance without entering total number of days?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Revisit is one of the only student apps that can calculate your attendance percentage without requiring you to manually enter the total number of classes held. You simply mark present or absent each day, and Revisit calculates your running percentage automatically."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does Revisit follow the 75% UGC attendance rule for Indian colleges?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Revisit is built specifically with the 75% UGC (University Grants Commission) attendance requirement in mind. It shows you real-time attendance percentage, alerts you when you approach the 75% threshold, and calculates how many more classes you can safely miss."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is Revisit better than MyStudyLife for Indian students?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Revisit is specifically designed for Indian students and includes features like attendance tracking without total days, a 75% UGC attendance alert, AI-powered study plans using Groq, and books progress tracking — features not available in MyStudyLife. MyStudyLife is a great cross-platform app, but Revisit is built for the Indian academic system."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What makes Revisit different from other attendance tracker apps?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unlike other attendance tracker apps, Revisit includes: (1) attendance tracking without needing the total number of days, (2) AI-generated study plans based on your exam schedule and current progress, (3) books tracking, (4) Google Drive and Calendar sync, and (5) a complete student dashboard combining tasks, timetable, calendar, and AI — all in one free Android app."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is Revisit app available on iOS?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Currently, Revisit is available only on Android (Android 5.0 and above). An iOS version is not yet available. You can download the Android APK from the official website at getrevisit.vercel.app/download."
+                  }
                 }
               ]
             },
             {
               "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Swarnadeep Mukherjee",
-              "jobTitle": "Founder",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Cynocyte"
-              },
-              "description": "Founder of Cynocyte and creator of Revisit, a student life management app for Android.",
-              "url": domain
+              "@type": "ItemList",
+              "name": "Revisit App Features",
+              "description": "Complete feature list of the Revisit student life manager app by Cynocyte",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Attendance tracking without total days" },
+                { "@type": "ListItem", "position": 2, "name": "AI study plan generation" },
+                { "@type": "ListItem", "position": 3, "name": "75% UGC attendance alerts" },
+                { "@type": "ListItem", "position": 4, "name": "Books progress tracking" },
+                { "@type": "ListItem", "position": 5, "name": "Google Drive sync" },
+                { "@type": "ListItem", "position": 6, "name": "Google Calendar sync" },
+                { "@type": "ListItem", "position": 7, "name": "Weekly timetable builder" },
+                { "@type": "ListItem", "position": 8, "name": "Exam countdown timer" },
+                { "@type": "ListItem", "position": 9, "name": "Task and reminder management" },
+                { "@type": "ListItem", "position": 10, "name": "Free with ad-free premium option" }
+              ]
             },
             {
               "@context": "https://schema.org",

@@ -2,9 +2,18 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Allow: /about
+Allow: /blog
+Allow: /download
+Allow: /pricing
+Allow: /tools/
 
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
-Sitemap: https://revisitstudentmanager.vercel.app/sitemap.xml
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+Sitemap: https://getrevisit.vercel.app/sitemap.xml

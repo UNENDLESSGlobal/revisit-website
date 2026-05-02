@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
+import { Helmet } from 'react-helmet-async';
 
 const TermsPage = () => {
   useEffect(() => {
@@ -11,11 +12,14 @@ const TermsPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 md:px-12 items-center">
       <SEOHead 
-        title="Terms & Conditions - Revisit App by Cynocyte"
+        title="Terms & Conditions — Revisit App by Cynocyte"
         description="Read Revisit's terms and conditions by Cynocyte covering the freemium model, AI usage, Google access, and third-party services."
         canonicalPath="/terms-and-conditions"
         keywords="revisit terms, cynocyte terms of service, student app terms"
       />
+      <Helmet>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <Link 
         to="/"
         className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors z-20"

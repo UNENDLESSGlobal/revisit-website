@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { SEOHead } from '@/components/SEOHead'
+import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -388,6 +389,9 @@ const AdminDashboardPage = () => {
         description="Admin dashboard for managing Revisit subscription plans and payment history."
         canonicalPath="/admin/dashboard"
       />
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
 
       <div className="flex w-full flex-col gap-6">
         <div className="glass-card-strong p-6 md:p-8">

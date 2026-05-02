@@ -33,6 +33,8 @@ const TasksSection = () => {
           end: isMobile ? '+=80%' : '+=130%',
           pin: true,
           scrub: isMobile ? 0.3 : 0.6,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
         },
       });
 

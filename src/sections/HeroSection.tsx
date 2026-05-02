@@ -53,6 +53,8 @@ const HeroSection = () => {
           end: isMobile ? '+=80%' : '+=130%',
           pin: true,
           scrub: isMobile ? 0.3 : 0.6,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
           onLeaveBack: () => {
             gsap.set([headline, subheadline, cta], { opacity: 1, y: 0 });
             gsap.set(card, { opacity: 1, y: 0, scale: 1 });

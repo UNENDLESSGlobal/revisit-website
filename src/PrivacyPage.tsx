@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
+import { Helmet } from 'react-helmet-async';
 
 const PrivacyPage = () => {
   useEffect(() => {
@@ -11,11 +12,14 @@ const PrivacyPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 md:px-12 items-center">
       <SEOHead 
-        title="Privacy Policy - Revisit App by Cynocyte"
+        title="Privacy Policy — Revisit App by Cynocyte | Data Policy for Students"
         description="Read the Revisit privacy policy by Cynocyte covering data collection, Google account access, AI processing, and your rights."
         canonicalPath="/privacy-policy"
         keywords="revisit privacy policy, cynocyte privacy, student app data policy"
       />
+      <Helmet>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <Link 
         to="/"
         className="absolute top-24 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors z-20"

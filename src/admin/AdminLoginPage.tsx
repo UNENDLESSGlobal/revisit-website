@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { ArrowLeft, Eye, EyeOff, LockKeyhole, ShieldCheck } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { SEOHead } from '@/components/SEOHead'
+import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -62,6 +63,9 @@ const AdminLoginPage = () => {
         description="Restricted admin sign-in for the Revisit management dashboard."
         canonicalPath="/admin"
       />
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
 
       <div className="orb orb-accent left-[8%] top-[12%] h-[14rem] w-[14rem] animate-float-slow opacity-30 sm:h-[18rem] sm:w-[18rem]" />
       <div

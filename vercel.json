@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "revisitstudentmanager.vercel.app" }],
+      "destination": "https://getrevisit.vercel.app/$1",
+      "permanent": true
+    }
+  ]
+}

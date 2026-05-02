@@ -15,6 +15,11 @@ import DownloadPage from './DownloadPage';
 import PricingPage from './PricingPage';
 import PrivacyPage from './PrivacyPage';
 import TermsPage from './TermsPage';
+import AboutPage from './AboutPage';
+import AttendanceCalculatorPage from './pages/AttendanceCalculatorPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
+import PressPage from './pages/PressPage';
 import NotFoundPage from './NotFoundPage';
 import { SEOHead } from './components/SEOHead';
 import AdminLoginPage from './admin/AdminLoginPage';
@@ -147,6 +152,11 @@ function App() {
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/privacy-policy" element={<PrivacyPage />} />
         <Route path="/terms-and-conditions" element={<TermsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/press" element={<PressPage />} />
+        <Route path="/tools/attendance-calculator" element={<AttendanceCalculatorPage />} />
         <Route path="/admin" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFoundPage />} />

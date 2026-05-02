@@ -39,6 +39,8 @@ const AttendanceSection = () => {
           end: isMobile ? '+=80%' : '+=130%',
           pin: true,
           scrub: isMobile ? 0.3 : 0.6,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
         },
       });
 
@@ -93,9 +95,12 @@ const AttendanceSection = () => {
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6">
         <div ref={labelRef} className="text-center mb-4">
           <span className="section-label">Attendance</span>
-          <p className="text-revisit-text-secondary text-sm sm:text-base max-w-md mx-auto">
+          <p className="text-revisit-text-secondary text-sm sm:text-base max-w-md mx-auto mb-3">
             Know exactly where you stand—before it becomes a problem. Calculate attendance without the total number of days!
           </p>
+          <a href="/tools/attendance-calculator" className="inline-flex items-center gap-1 text-sm font-semibold text-revisit-accent hover:text-revisit-accent-dark transition-colors">
+            Use Free Tool →
+          </a>
         </div>
 
         <div ref={cardRef} className="w-full max-w-[980px] glass-card-strong overflow-hidden" style={{ minHeight: 'clamp(450px, 62vh, 540px)' }}>

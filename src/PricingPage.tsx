@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
+import { Helmet } from 'react-helmet-async';
 
 const yearlyPrice = 999;
 const monthlyPrice = 99;
@@ -92,11 +93,51 @@ const PricingPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
       <SEOHead
-        title="Revisit Pricing - Free & Premium Plans | Cynocyte"
-        description="Compare Revisit Free and Premium plans. Ad-free experience, unlimited AI, yearly savings. Student manager app by Cynocyte."
+        title="Revisit Pricing — Free & Premium Plans for Students | ₹99/month or ₹999/year | Cynocyte"
+        description="Revisit Free plan includes attendance tracking, tasks & timetable. Upgrade to Premium (₹99/month or ₹999/year) for ad-free experience and unlimited AI study plans. By Cynocyte."
         canonicalPath="/pricing"
-        keywords="revisit pricing, student app free plan, premium student planner, cynocyte revisit premium"
+        keywords="revisit pricing, student app free plan, premium student planner, cynocyte revisit premium, revisit premium price india"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Revisit App",
+            "description": "Student life manager app with attendance tracking, AI study plans, and task management.",
+            "brand": { "@type": "Brand", "name": "Cynocyte" },
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Revisit Free",
+                "price": "0",
+                "priceCurrency": "INR",
+                "description": "Free version with ads and basic features including tasks, calendar, and routines.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://getrevisit.vercel.app/download"
+              },
+              {
+                "@type": "Offer",
+                "name": "Revisit Premium Monthly",
+                "price": "99",
+                "priceCurrency": "INR",
+                "description": "Premium monthly plan: ad-free experience, unlimited AI study plans, all features included.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://getrevisit.vercel.app/pricing"
+              },
+              {
+                "@type": "Offer",
+                "name": "Revisit Premium Yearly",
+                "price": "999",
+                "priceCurrency": "INR",
+                "description": "Premium yearly plan: best value, ad-free, unlimited AI, effective ₹77/month.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://getrevisit.vercel.app/pricing"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
 
       <Link
         to="/"

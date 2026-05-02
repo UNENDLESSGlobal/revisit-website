@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, Download, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEOHead } from './components/SEOHead';
+import { Helmet } from 'react-helmet-async';
 import { fetchPublicDownloadUrl } from './lib/supabase';
 
 const trackDownloadClick = (eventLabel: string) => {
@@ -38,11 +39,24 @@ const DownloadPage = () => {
   return (
     <div className="relative min-h-screen bg-revisit-bg flex flex-col pt-24 px-6 items-center">
       <SEOHead
-        title="Download Revisit App - Free Student Manager for Android | Cynocyte"
-        description="Download Revisit for free on Android. Track attendance, manage tasks, build routines, get AI study plans. By Cynocyte."
+        title="Download Revisit Free — Student Manager App for Android | Cynocyte"
+        description="Download Revisit APK free for Android. Track attendance without total days, manage tasks, build timetables, and get AI study plans. Made by Cynocyte, founded by Swarnadeep Mukherjee. Android 5.0+"
         canonicalPath="/download"
-        keywords="download revisit app, student manager apk, free android student app, academic planner download, cynocyte app download"
+        keywords="download revisit apk, free student app download android, cynocyte app, revisit android download, student planner apk free india, download revisit app, student manager apk, academic planner download, cynocyte app download"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Download Revisit App",
+            "potentialAction": {
+              "@type": "DownloadAction",
+              "target": "https://getrevisit.vercel.app/download"
+            }
+          })}
+        </script>
+      </Helmet>
       <Link
         to="/"
         className="absolute top-32 md:top-40 left-6 md:left-12 flex items-center gap-2 text-revisit-text-secondary hover:text-revisit-text transition-colors"
